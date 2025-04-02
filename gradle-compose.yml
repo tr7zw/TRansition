@@ -1,0 +1,33 @@
+version: '0.0.2'
+source: "https://github.com/tr7zw/ProcessedModTemplate/tree/libworld"
+replacements:
+  name: "TRansition"
+  id: "transition"
+  version: "1.0.0"
+  description: "Library to transition between Modloaders and Minecraft versions"
+  homepageUrl: "https://github.com/tr7zw/TRansition"
+  sourcesUrl: "https://github.com/tr7zw/TRansition"
+  issuesUrl: "https://github.com/tr7zw/TRansition/issues"
+  licenseName: "MIT"
+  fabric_entrypoint: "dev.tr7zw.transition.ClientTRansitionMod"
+  fabric_modmenu_entrypoint: "none"
+  relocationpackage: "dev.tr7zw.transition.legacy"
+  licensename: "LICENSE-TRansition"
+  versionlessname: "TRansition-Versionless"
+  dependencies: "
+    "
+enabledFlags:
+  - autopublish
+  - publishSnapshot
+rootProject:
+  template: "."
+subProjects:
+  TRansition-Versionless:
+    template: "Versionless"
+    replacements:
+      dependencies: '
+
+      compileOnly "com.google.code.gson:gson:2.10.1"
+
+      compileOnly "org.apache.logging.log4j:log4j-core:2.20.0"
+      '

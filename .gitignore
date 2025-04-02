@@ -1,0 +1,54 @@
+# gradle
+
+.gradle/
+build/
+out/
+classes/
+
+# eclipse
+
+*.launch
+
+# idea
+
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# vscode
+
+.settings/
+.vscode/
+bin/
+.classpath
+.project
+
+# macos
+
+*.DS_Store
+
+# fabric
+
+run/
+logs/
+
+# compose
+
+*.gradle
+*.properties
+gradle/wrapper
+VersionShared
+UtilityCode
+formatter.xml
+src/main/fabric-resources/fabric.mod.json
+src/main/forge-resources/META-INF/mods.toml
+src/main/neoforge-resources/META-INF/mods.toml
+**/src/main/java/dev/tr7zw/config/CustomConfigScreen.java
+**/src/main/java/dev/tr7zw/util/ComponentProvider.java
+src/main/resources/pack.mcmeta
+src/main/java/dev/tr7zw/util/ModLoaderUtil.java
+src/main/java/dev/tr7zw/util/NMSHelper.java
+src/main/neoforge-resources/META-INF/neoforge.mods.toml
+src/main/java/dev/tr7zw/config/**
+src/main/java/dev/tr7zw/util/**
