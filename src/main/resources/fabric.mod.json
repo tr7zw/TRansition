@@ -16,9 +16,6 @@
     "entrypoints": {
         "client": [
             "${fabric_entrypoint}"
-        ],
-        "modmenu": [
-            "${fabric_modmenu_entrypoint}"
         ]
     },
     "mixins": [
