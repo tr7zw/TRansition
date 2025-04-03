@@ -1,4 +1,4 @@
-package dev.tr7zw.transition.nms;
+package dev.tr7zw.transition.mc;
 
 import java.util.Set;
 import java.util.Map.Entry;

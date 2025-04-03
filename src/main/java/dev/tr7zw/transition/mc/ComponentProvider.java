@@ -1,4 +1,4 @@
-package dev.tr7zw.transition.nms;
+package dev.tr7zw.transition.mc;
 
 import lombok.experimental.UtilityClass;
 import net.minecraft.network.chat.Component;

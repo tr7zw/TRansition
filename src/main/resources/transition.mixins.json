@@ -3,7 +3,11 @@
     "minVersion": "0.8",
     "package": "dev.tr7zw.transition.mixin",
     "compatibilityLevel": "JAVA_16",
-    "client": [],
+    "client": [
+        "EntityRenderStateMixin",
+        "ExtensionMixin",
+        "EntityRendererMixin"
+    ],
     "injectors": {
         "defaultRequire": 1
     }

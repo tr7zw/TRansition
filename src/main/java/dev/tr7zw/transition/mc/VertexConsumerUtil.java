@@ -1,4 +1,4 @@
-package dev.tr7zw.transition.nms;
+package dev.tr7zw.transition.mc;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
