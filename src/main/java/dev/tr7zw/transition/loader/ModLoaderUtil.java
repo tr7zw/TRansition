@@ -2,6 +2,7 @@ package dev.tr7zw.transition.loader;
 
 import java.util.function.Function;
 
+import dev.tr7zw.transition.ClientTRansitionMod;
 import lombok.experimental.UtilityClass;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.gui.screens.Screen;
@@ -62,7 +63,6 @@ public class ModLoaderUtil {
         //#elseif FORGE || NEOFORGE
         //$$ Minecraft.getInstance().options.keyMappings = ArrayUtils.add(Minecraft.getInstance().options.keyMappings, keyBinding);
         //#endif
-        //spotless:on
 
     }
 
@@ -140,10 +140,10 @@ public class ModLoaderUtil {
         //#endif
         //#endif
         //#endif
-        //spotless:on
     }
 
     public static void registerConfigScreen(Function<Screen, Screen> createScreen) {
+        ClientTRansitionMod.configScreenManager.registerConfigScreen(createScreen);
         //#if FORGE || NEOFORGE
         //#if MC <= 11605
         //$$         ModLoadingContext.get().registerExtensionPoint(
@@ -164,7 +164,6 @@ public class ModLoaderUtil {
         //$$        }));
         //#endif 
         //#endif
-        //spotless:on
     }
 
     public static void registerClientSetupListener(Runnable runnable) {
@@ -182,7 +181,6 @@ public class ModLoaderUtil {
         //$$ 	
         //$$ });
         //#endif
-        //spotless:on
     }
 
     //#if FORGE
@@ -194,6 +192,5 @@ public class ModLoaderUtil {
     //$$    	NeoForge.EVENT_BUS.addListener(handler);
     //$$    }
     //#endif
-    //spotless:on
 
 }
