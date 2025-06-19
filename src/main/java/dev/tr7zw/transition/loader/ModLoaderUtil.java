@@ -1,5 +1,8 @@
 package dev.tr7zw.transition.loader;
 
+//#if FORGE || NEOFORGE
+//$$ import java.util.function.Consumer;
+//#endif
 import java.util.function.Function;
 
 import dev.tr7zw.transition.ClientTRansitionMod;
@@ -21,7 +24,9 @@ import net.fabricmc.loader.api.FabricLoader;
 //$$ import net.minecraftforge.fml.ModLoadingContext;
 //$$ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 //$$ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+//#if MC < 12106
 //$$ import net.minecraftforge.eventbus.api.Event;
+//#endif
 //#if MC <= 11605
 //$$ import net.minecraftforge.fml.ExtensionPoint;
 //$$ import net.minecraftforge.fml.network.FMLNetworkConstants;
@@ -72,6 +77,14 @@ public class ModLoaderUtil {
             runnable.run();
         });
         //#elseif FORGE
+        //#if MC >= 12106
+        //$$ ClientTickEvent.Pre.BUS.addListener(new Consumer<ClientTickEvent.Pre>() {
+        //$$    @Override
+        //$$    public void accept(ClientTickEvent.Pre t) {
+        //$$            runnable.run();
+        //$$   }
+        //$$});
+        //#else
         //$$ MinecraftForge.EVENT_BUS.addListener(new Consumer<ClientTickEvent>() {
         //$$ 
         //$$ 	@Override
@@ -81,6 +94,7 @@ public class ModLoaderUtil {
         //$$ 	}
         //$$ 	
         //$$ });
+        //#endif
         //#elseif NEOFORGE
         //#if MC >= 12005
         //$$   NeoForge.EVENT_BUS.addListener(new Consumer<net.neoforged.neoforge.client.event.ClientTickEvent.Pre>() {
@@ -171,7 +185,11 @@ public class ModLoaderUtil {
         //#if NEOFORGE
         //$$ ModLoadingContext.get().getActiveContainer().getEventBus().addListener(new Consumer<FMLClientSetupEvent>() {
         //#else
+        //#if MC < 12106
         //$$ FMLJavaModLoadingContext.get().getModEventBus().addListener(new Consumer<FMLClientSetupEvent>() {
+        //#else
+        //$$ FMLClientSetupEvent.getBus(modLoadingContext.get().getModBusGroup()).addListener(new Consumer<FMLClientSetupEvent>() {
+        //#endif
         //#endif
         //$$ 
         //$$ 	@Override
@@ -184,6 +202,12 @@ public class ModLoaderUtil {
     }
 
     //#if FORGE
+    //$$private static final ThreadLocal<net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext> modLoadingContext = ThreadLocal.withInitial(() -> null);
+    //$$
+    //$$public static void setModLoadingContext(net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext context) {
+    //$$    modLoadingContext.set(context);
+    //$$}
+    //#if MC < 12106
     //$$     public static <T extends Event> void registerForgeEvent(Consumer<T> handler) {
     //$$     	MinecraftForge.EVENT_BUS.addListener(handler);
     //$$     }
@@ -191,6 +215,7 @@ public class ModLoaderUtil {
     //$$    public static <T extends Event> void registerForgeEvent(Consumer<T> handler) {
     //$$    	NeoForge.EVENT_BUS.addListener(handler);
     //$$    }
+    //#endif
     //#endif
 
 }
