@@ -11,7 +11,6 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.gui.screens.Screen;
 //#if FABRIC
 import net.minecraft.Util;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.loader.api.FabricLoader;
 //#elseif FORGE
@@ -71,51 +70,9 @@ public class ModLoaderUtil {
 
     }
 
+    @Deprecated
     public static void registerClientTickListener(Runnable runnable) {
-        //#if FABRIC
-        ClientTickEvents.END_CLIENT_TICK.register(e -> {
-            runnable.run();
-        });
-        //#elseif FORGE
-        //#if MC >= 12106
-        //$$ ClientTickEvent.Pre.BUS.addListener(new Consumer<ClientTickEvent.Pre>() {
-        //$$    @Override
-        //$$    public void accept(ClientTickEvent.Pre t) {
-        //$$            runnable.run();
-        //$$   }
-        //$$});
-        //#else
-        //$$ MinecraftForge.EVENT_BUS.addListener(new Consumer<ClientTickEvent>() {
-        //$$ 
-        //$$ 	@Override
-        //$$ 	public void accept(ClientTickEvent t) {
-        //$$    if (t.phase != ClientTickEvent.Phase.START) return;
-        //$$ 		runnable.run();
-        //$$ 	}
-        //$$ 	
-        //$$ });
-        //#endif
-        //#elseif NEOFORGE
-        //#if MC >= 12005
-        //$$   NeoForge.EVENT_BUS.addListener(new Consumer<net.neoforged.neoforge.client.event.ClientTickEvent.Pre>() {
-        //$$  
-        //$$        @Override
-        //$$       public void accept(net.neoforged.neoforge.client.event.ClientTickEvent.Pre t) {
-        //$$               runnable.run();
-        //$$       }
-        //$$  
-        //$$  });
-        //#else
-        //$$  NeoForge.EVENT_BUS.addListener(new Consumer<ClientTickEvent>() {
-        //$$     
-        //$$    	@Override
-        //$$    	public void accept(ClientTickEvent t) {
-        //$$    		runnable.run();
-        //$$     	}
-        //$$     	
-        //$$    });
-        //#endif
-        //#endif
+        ModLoaderEventUtil.registerClientTickStartListener(runnable);
     }
 
     public static boolean isModLoaded(String name) {
@@ -180,25 +137,9 @@ public class ModLoaderUtil {
         //#endif
     }
 
+    @Deprecated
     public static void registerClientSetupListener(Runnable runnable) {
-        //#if FORGE || NEOFORGE
-        //#if NEOFORGE
-        //$$ ModLoadingContext.get().getActiveContainer().getEventBus().addListener(new Consumer<FMLClientSetupEvent>() {
-        //#else
-        //#if MC < 12106
-        //$$ FMLJavaModLoadingContext.get().getModEventBus().addListener(new Consumer<FMLClientSetupEvent>() {
-        //#else
-        //$$ FMLClientSetupEvent.getBus(modLoadingContext.get().getModBusGroup()).addListener(new Consumer<FMLClientSetupEvent>() {
-        //#endif
-        //#endif
-        //$$ 
-        //$$ 	@Override
-        //$$ 	public void accept(FMLClientSetupEvent t) {
-        //$$ 		runnable.run();
-        //$$ 	}
-        //$$ 	
-        //$$ });
-        //#endif
+        ModLoaderEventUtil.registerClientSetupListener(runnable);
     }
 
     //#if FORGE
@@ -207,6 +148,7 @@ public class ModLoaderUtil {
     //$$public static void setModLoadingContext(net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext context) {
     //$$    modLoadingContext.set(context);
     //$$}
+    //$$public static FMLJavaModLoadingContext getModLoadingContext() { return modLoadingContext.get(); }
     //#if MC < 12106
     //$$     public static <T extends Event> void registerForgeEvent(Consumer<T> handler) {
     //$$     	MinecraftForge.EVENT_BUS.addListener(handler);
