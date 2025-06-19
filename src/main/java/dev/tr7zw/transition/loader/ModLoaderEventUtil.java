@@ -5,9 +5,13 @@ import lombok.experimental.UtilityClass;
 //#if FABRIC
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 //#elseif FORGE
+//#if MC >= 11900
+//$$ import net.minecraftforge.event.TickEvent.LevelTickEvent;
+//#else
+//$$ import net.minecraftforge.event.TickEvent.WorldTickEvent;
+//#endif
 //$$ import java.util.function.Consumer;
 //$$ import net.minecraftforge.event.TickEvent.ClientTickEvent;
-//$$ import net.minecraftforge.event.TickEvent.LevelTickEvent;
 //$$ import net.minecraftforge.common.MinecraftForge;
 //$$ import net.minecraftforge.fml.ModLoadingContext;
 //$$ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -115,7 +119,7 @@ public class ModLoaderEventUtil {
         //#endif
         //#endif
     }
-    
+
     public static void registerWorldTickStartListener(Runnable runnable) {
         //#if FABRIC
         ClientTickEvents.START_WORLD_TICK.register(e -> {
@@ -129,12 +133,22 @@ public class ModLoaderEventUtil {
         //$$            runnable.run();
         //$$   }
         //$$});
-        //#else
+        //#elseif MC >= 11900
         //$$ MinecraftForge.EVENT_BUS.addListener(new Consumer<LevelTickEvent>() {
         //$$ 
         //$$    @Override
         //$$    public void accept(LevelTickEvent t) {
-        //$$    if (t.phase != ClientTickEvent.Phase.START) return;
+        //$$    if (t.phase != LevelTickEvent.Phase.START) return;
+        //$$            runnable.run();
+        //$$    }
+        //$$    
+        //$$ });
+        //#else
+        //$$ MinecraftForge.EVENT_BUS.addListener(new Consumer<WorldTickEvent>() {
+        //$$ 
+        //$$    @Override
+        //$$    public void accept(WorldTickEvent t) {
+        //$$    if (t.phase != WorldTickEvent.Phase.START) return;
         //$$            runnable.run();
         //$$    }
         //$$    
@@ -142,10 +156,10 @@ public class ModLoaderEventUtil {
         //#endif
         //#elseif NEOFORGE
         //#if MC >= 12005
-        //$$   NeoForge.EVENT_BUS.addListener(new Consumer<net.neoforged.neoforge.client.event.LevelTickEvent.Pre>() {
+        //$$   NeoForge.EVENT_BUS.addListener(new Consumer<net.neoforged.neoforge.event.tick.LevelTickEvent.Pre>() {
         //$$  
         //$$        @Override
-        //$$       public void accept(net.neoforged.neoforge.client.event.LevelTickEvent.Pre t) {
+        //$$       public void accept(net.neoforged.neoforge.event.tick.LevelTickEvent.Pre t) {
         //$$               runnable.run();
         //$$       }
         //$$  
@@ -162,7 +176,7 @@ public class ModLoaderEventUtil {
         //#endif
         //#endif
     }
-    
+
     public static void registerWorldTickEndListener(Runnable runnable) {
         //#if FABRIC
         ClientTickEvents.END_WORLD_TICK.register(e -> {
@@ -170,18 +184,28 @@ public class ModLoaderEventUtil {
         });
         //#elseif FORGE
         //#if MC >= 12106
-        //$$ ClientTickEvent.Post.BUS.addListener(new Consumer<LevelTickEvent.Post>() {
+        //$$ LevelTickEvent.Post.BUS.addListener(new Consumer<LevelTickEvent.Post>() {
         //$$    @Override
         //$$    public void accept(LevelTickEvent.Post t) {
         //$$            runnable.run();
         //$$   }
         //$$});
-        //#else
+        //#elseif MC >= 11900
         //$$ MinecraftForge.EVENT_BUS.addListener(new Consumer<LevelTickEvent>() {
         //$$ 
         //$$    @Override
         //$$    public void accept(LevelTickEvent t) {
-        //$$    if (t.phase != ClientTickEvent.Phase.END) return;
+        //$$    if (t.phase != LevelTickEvent.Phase.END) return;
+        //$$            runnable.run();
+        //$$    }
+        //$$    
+        //$$ });
+        //#else
+        //$$ MinecraftForge.EVENT_BUS.addListener(new Consumer<WorldTickEvent>() {
+        //$$ 
+        //$$    @Override
+        //$$    public void accept(WorldTickEvent t) {
+        //$$    if (t.phase != WorldTickEvent.Phase.END) return;
         //$$            runnable.run();
         //$$    }
         //$$    
@@ -189,10 +213,10 @@ public class ModLoaderEventUtil {
         //#endif
         //#elseif NEOFORGE
         //#if MC >= 12005
-        //$$   NeoForge.EVENT_BUS.addListener(new Consumer<net.neoforged.neoforge.client.event.LevelTickEvent.Post>() {
+        //$$   NeoForge.EVENT_BUS.addListener(new Consumer<net.neoforged.neoforge.event.tick.LevelTickEvent.Post>() {
         //$$  
         //$$        @Override
-        //$$       public void accept(net.neoforged.neoforge.client.event.LevelTickEvent.Post t) {
+        //$$       public void accept(net.neoforged.neoforge.event.tick.LevelTickEvent.Post t) {
         //$$               runnable.run();
         //$$       }
         //$$  
