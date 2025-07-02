@@ -153,11 +153,11 @@ public class ModLoaderUtil {
     //$$     public static <T extends Event> void registerForgeEvent(Consumer<T> handler) {
     //$$     	MinecraftForge.EVENT_BUS.addListener(handler);
     //$$     }
+    //#endif
     //#elseif NEOFORGE
     //$$    public static <T extends Event> void registerForgeEvent(Consumer<T> handler) {
     //$$    	NeoForge.EVENT_BUS.addListener(handler);
     //$$    }
-    //#endif
     //#endif
 
 }
