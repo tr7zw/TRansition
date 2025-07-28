@@ -7,19 +7,19 @@ import net.minecraft.resources.ResourceLocation;
 public class GeneralUtil {
 
     public static ResourceLocation getResourceLocation(String namespace, String path) {
-        //#if MC >= 12100
+        //? if >= 1.21.0 {
         return ResourceLocation.fromNamespaceAndPath(namespace, path);
-        //#else
-        //$$ return new ResourceLocation(namespace, path);
-        //#endif
+        //?} else {
+        /*return new ResourceLocation(namespace, path);
+        *///?}
     }
 
     public static ResourceLocation getResourceLocation(String key) {
-        //#if MC >= 12100
+        //? if >= 1.21.0 {
         return ResourceLocation.parse(key);
-        //#else
-        //$$ return new ResourceLocation(key);
-        //#endif
+        //?} else {
+        /*return new ResourceLocation(key);
+        *///?}
     }
 
 }

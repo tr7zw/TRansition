@@ -2,14 +2,14 @@ package dev.tr7zw.transition.mc.entitywrapper;
 
 import net.minecraft.world.entity.Entity;
 import dev.tr7zw.transition.mc.extending.ExtensionHolder;
-//#if MC >= 12102
+//? if >= 1.21.2 {
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
-//#endif
+//?}
 
 public class EntityWrapper {
 
     private final Entity entity;
-    //#if MC >= 12102
+    //? if >= 1.21.2 {
     private final EntityRenderState renderState;
 
     public EntityRenderState getRenderState() {
@@ -24,12 +24,12 @@ public class EntityWrapper {
             entity = null;
         }
     }
-    //#else
-    //$$
-    //$$public EntityWrapper(Entity entity) {
-    //$$        this.entity = entity;
-    //$$}
-    //#endif
+    //?} else {
+
+    /*public EntityWrapper(Entity entity) {
+            this.entity = entity;
+    }
+    *///?}
 
     public Entity getEntity() {
         return entity;

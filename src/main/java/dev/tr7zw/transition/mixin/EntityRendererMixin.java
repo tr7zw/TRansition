@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-//#if MC >= 12102
+//? if >= 1.21.2 {
 import net.minecraft.world.entity.Entity;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import dev.tr7zw.transition.mc.entitywrapper.EntityRenderStateExtender;
@@ -21,7 +21,7 @@ public class EntityRendererMixin {
     }
 
 }
-//#else
-//$$ @Mixin(targets = "net.minecraft.client.Minecraft") // dummy for older versions
-//$$ public class EntityRendererMixin {}
-//#endif
+//?} else {
+/*@Mixin(targets = "net.minecraft.client.Minecraft") // dummy for older versions
+public class EntityRendererMixin {}
+*///?}

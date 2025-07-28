@@ -1,19 +1,19 @@
 package dev.tr7zw.transition.mc.entitywrapper;
 
-//#if MC >= 12102
+//? if >= 1.21.2 {
 import net.minecraft.client.renderer.entity.state.PlayerRenderState;
-//#else
-//$$import net.minecraft.client.player.AbstractClientPlayer;
-//$$import net.minecraft.world.entity.EquipmentSlot;
-//$$import net.minecraft.world.entity.player.PlayerModelPart;
-//$$import dev.tr7zw.transition.mc.PlayerUtil;
-//#endif
+//?} else {
+/*import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.PlayerModelPart;
+import dev.tr7zw.transition.mc.PlayerUtil;
+*///?}
 import net.minecraft.world.item.Items;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.resources.ResourceLocation;
 
 public class PlayerWrapper extends LivingEntityWrapper {
-    //#if MC >= 12102
+    //? if >= 1.21.2 {
     private final PlayerRenderState renderState;
 
     @Override
@@ -25,15 +25,15 @@ public class PlayerWrapper extends LivingEntityWrapper {
         super(renderState);
         this.renderState = renderState;
     }
-    //#else
-    //$$private final AbstractClientPlayer player;
-    //$$
-    //$$
-    //$$public PlayerWrapper(AbstractClientPlayer player) {
-    //$$        super(player);
-    //$$        this.player = player;
-    //$$}
-    //#endif
+    //?} else {
+    /*private final AbstractClientPlayer player;
+    
+    
+    public PlayerWrapper(AbstractClientPlayer player) {
+            super(player);
+            this.player = player;
+    }
+    *///?}
 
     @Override
     public Player getEntity() {
@@ -41,46 +41,46 @@ public class PlayerWrapper extends LivingEntityWrapper {
     }
 
     public ResourceLocation getCapeTexture() {
-        //#if MC >= 12102
+        //? if >= 1.21.2 {
         return renderState.skin.capeTexture();
-        //#else
-        //$$return PlayerUtil.getPlayerCape(player);
-        //#endif
+        //?} else {
+        /*return PlayerUtil.getPlayerCape(player);
+        *///?}
     }
 
     public boolean isPlayerInvisible() {
-        //#if MC >= 12102
+        //? if >= 1.21.2 {
         return renderState.isInvisible;
-        //#else
-        //$$return player.isInvisible();
-        //#endif
+        //?} else {
+        /*return player.isInvisible();
+        *///?}
     }
 
     public boolean isCapeVisible() {
-        //#if MC >= 12102
+        //? if >= 1.21.2 {
         return renderState.showCape && !isPlayerInvisible();
-        //#else
-        //$$return player.isModelPartShown(PlayerModelPart.CAPE);
-        //#endif
+        //?} else {
+        /*return player.isModelPartShown(PlayerModelPart.CAPE);
+        *///?}
     }
 
     public boolean hasElytraEquipped() {
-        //#if MC >= 12104
+        //? if >= 1.21.4 {
         return renderState.chestEquipment.is(Items.ELYTRA);
-        //#elseif MC >= 12102
-        //$$return renderState.chestItem.is(Items.ELYTRA);
-        //#else
-        //$$return player.getItemBySlot(EquipmentSlot.CHEST).getItem().equals(Items.ELYTRA);
-        //#endif
+        //?} else if >= 1.21.2 {
+        //return renderState.chestItem.is(Items.ELYTRA);
+        //?} else {
+        /*return player.getItemBySlot(EquipmentSlot.CHEST).getItem().equals(Items.ELYTRA);
+        *///?}
     }
 
     public boolean hasChestplateEquipped() {
-        //#if MC >= 12104
+        //? if >= 1.21.4 {
         return !hasElytraEquipped() && !renderState.chestEquipment.isEmpty();
-        //#elseif MC >= 12102
-        //$$return !hasElytraEquipped() && !renderState.chestItem.isEmpty();
-        //#else
-        //$$return !hasElytraEquipped() && !player.getItemBySlot(EquipmentSlot.CHEST).isEmpty();
-        //#endif
+        //?} else if >= 1.21.2 {
+        //return !hasElytraEquipped() && !renderState.chestItem.isEmpty();
+        //?} else {
+        /*return !hasElytraEquipped() && !player.getItemBySlot(EquipmentSlot.CHEST).isEmpty();
+        *///?}
     }
 }
