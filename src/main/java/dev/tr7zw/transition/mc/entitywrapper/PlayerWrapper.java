@@ -1,7 +1,9 @@
 package dev.tr7zw.transition.mc.entitywrapper;
 
-//#if MC >= 12102
-import net.minecraft.client.renderer.entity.state.PlayerRenderState;
+//#if MC >= 12109
+import net.minecraft.client.renderer.entity.state.AvatarRenderState;
+//#elseif MC >= 12102
+//$$import net.minecraft.client.renderer.entity.state.PlayerRenderState;
 //#else
 //$$import net.minecraft.client.player.AbstractClientPlayer;
 //$$import net.minecraft.world.entity.EquipmentSlot;
@@ -13,18 +15,28 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.resources.ResourceLocation;
 
 public class PlayerWrapper extends LivingEntityWrapper {
-    //#if MC >= 12102
-    private final PlayerRenderState renderState;
+    //#if MC >= 12109
+    private final AvatarRenderState renderState;
 
     @Override
-    public PlayerRenderState getRenderState() {
+    public AvatarRenderState getRenderState() {
         return renderState;
     }
 
-    public PlayerWrapper(PlayerRenderState renderState) {
+    public PlayerWrapper(AvatarRenderState renderState) {
         super(renderState);
         this.renderState = renderState;
     }
+    //#elseif MC >= 12102
+    //$$private final PlayerRenderState renderState;
+    //$$@Override
+    //$$public PlayerRenderState getRenderState() {
+    //$$    return renderState;
+    //$$}
+    //$$public PlayerWrapper(PlayerRenderState renderState) {
+    //$$    super(renderState);
+    //$$    this.renderState = renderState;
+    //$$}
     //#else
     //$$private final AbstractClientPlayer player;
     //$$
@@ -41,8 +53,10 @@ public class PlayerWrapper extends LivingEntityWrapper {
     }
 
     public ResourceLocation getCapeTexture() {
-        //#if MC >= 12102
-        return renderState.skin.capeTexture();
+        //#if MC >= 12109
+        return renderState.skin.cape().texturePath();
+        //#elseif MC >= 12102
+        //$$return renderState.skin.capeTexture();
         //#else
         //$$return PlayerUtil.getPlayerCape(player);
         //#endif

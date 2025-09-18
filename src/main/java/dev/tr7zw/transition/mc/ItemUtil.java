@@ -50,24 +50,33 @@ public class ItemUtil {
     }
 
     public static GameProfile getGameProfile(ItemStack itemStack) {
-        //#if MC >= 12005
+        //#if MC >= 12109
         if (itemStack.getComponents().has(DataComponents.CUSTOM_MODEL_DATA)) {
             return null;
         }
         if (itemStack.getComponents().has(DataComponents.PROFILE)) {
             ResolvableProfile resolvableProfile = (ResolvableProfile) itemStack.get(DataComponents.PROFILE);
-            if (resolvableProfile != null && !resolvableProfile.isResolved()) {
-                itemStack.remove(DataComponents.PROFILE);
-                resolvableProfile.resolve().thenAcceptAsync(
-                        resolvableProfile2 -> itemStack.set(DataComponents.PROFILE, resolvableProfile2),
-                        Minecraft.getInstance());
-                resolvableProfile = null;
-            }
-            if (resolvableProfile != null) {
-                return resolvableProfile.gameProfile();
-            }
+            return Minecraft.getInstance().playerSkinRenderCache().getOrDefault(resolvableProfile).gameProfile();
         }
         return null;
+        //#elseif MC >= 12005
+        //$$if (itemStack.getComponents().has(DataComponents.CUSTOM_MODEL_DATA)) {
+        //$$    return null;
+        //$$}
+        //$$if (itemStack.getComponents().has(DataComponents.PROFILE)) {
+        //$$    ResolvableProfile resolvableProfile = (ResolvableProfile) itemStack.get(DataComponents.PROFILE);
+        //$$    if (resolvableProfile != null && !resolvableProfile.isResolved()) {
+        //$$        itemStack.remove(DataComponents.PROFILE);
+        //$$       resolvableProfile.resolve().thenAcceptAsync(
+        //$$               resolvableProfile2 -> itemStack.set(DataComponents.PROFILE, resolvableProfile2),
+        //$$                Minecraft.getInstance());
+        //$$       resolvableProfile = null;
+        //$$   }
+        //$$    if (resolvableProfile != null) {
+        //$$       return resolvableProfile.gameProfile();
+        //$$    }
+        //$$}
+        //$$return null;
         //#else
         //$$ if (itemStack.hasTag()) {
         //$$     CompoundTag compoundTag = itemStack.getTag();

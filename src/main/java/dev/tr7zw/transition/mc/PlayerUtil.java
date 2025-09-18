@@ -1,5 +1,7 @@
 package dev.tr7zw.transition.mc;
 
+import java.util.Optional;
+
 import com.mojang.authlib.GameProfile;
 
 import lombok.experimental.UtilityClass;
@@ -7,8 +9,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.resources.ResourceLocation;
 
-//#if MC >= 12002
-import net.minecraft.client.resources.PlayerSkin;
+//#if MC >= 12002 && MC < 12109
+//$$import net.minecraft.client.resources.PlayerSkin;
 //#else
 //$$ import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 //$$ import java.util.Map;
@@ -18,20 +20,25 @@ import net.minecraft.client.resources.PlayerSkin;
 public class PlayerUtil {
 
     public static ResourceLocation getPlayerSkin(AbstractClientPlayer player) {
-        //#if MC >= 12002
-        return player.getSkin().texture();
+        //#if MC >= 12109
+        return player.getSkin().body().texturePath();
+        //#elseif MC >= 12002
+        //$$return player.getSkin().texture();
         //#else
         //$$ return player.getSkinTextureLocation();
         //#endif
     }
 
     public static ResourceLocation getPlayerSkin(GameProfile gameprofile) {
-        //#if MC >= 12002
-        PlayerSkin playerSkin = Minecraft.getInstance().getSkinManager().getInsecureSkin(gameprofile);
-        if (playerSkin.textureUrl() == null) {
-            return null;
-        }
-        return playerSkin.texture();
+        //#if MC >= 12109
+        return Minecraft.getInstance().getSkinManager().get(gameprofile).getNow(Optional.empty())
+                .map(s -> s.body().texturePath()).orElse(null);
+        //#elseif MC >= 12002
+        //$$PlayerSkin playerSkin = Minecraft.getInstance().getSkinManager().getInsecureSkin(gameprofile);
+        //$$if (playerSkin.textureUrl() == null) {
+        //$$    return null;
+        //$$}
+        //$$return playerSkin.texture();
         //#else
         //$$ Map<MinecraftProfileTexture.Type, MinecraftProfileTexture> map = Minecraft.getInstance().getSkinManager()
         //$$         .getInsecureSkinInformation(gameprofile);
@@ -47,8 +54,10 @@ public class PlayerUtil {
 
     public static ResourceLocation getPlayerCape(AbstractClientPlayer player) {
         try {
-            //#if MC >= 12002
-            return player.getSkin().capeTexture();
+            //#if MC >= 12109
+            return player.getSkin().cape().texturePath();
+            //#elseif MC >= 12002
+            //$$return player.getSkin().capeTexture();
             //#else
             //$$ return player.getCloakTextureLocation();
             //#endif
