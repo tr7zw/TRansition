@@ -1,7 +1,11 @@
 package dev.tr7zw.transition.mc;
 
 import lombok.experimental.UtilityClass;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
 
 @UtilityClass
 public class GeneralUtil {
@@ -20,6 +24,22 @@ public class GeneralUtil {
         //#else
         //$$ return new ResourceLocation(key);
         //#endif
+    }
+
+    public static LocalPlayer getPlayer() {
+        return Minecraft.getInstance().player;
+    }
+
+    public static Entity getCameraEntity() {
+        //#if MC >= 12109
+        return Minecraft.getInstance().getCameraEntity();
+        //#else
+        //$$ return Minecraft.getInstance().cameraEntity;
+        //#endif
+    }
+    
+    public static Level getWorld() {
+        return Minecraft.getInstance().level;
     }
 
 }
