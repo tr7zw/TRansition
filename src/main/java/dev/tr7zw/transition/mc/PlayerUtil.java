@@ -29,6 +29,26 @@ public class PlayerUtil {
         //#endif
     }
 
+    //#if MC >= 12109
+    public static ResourceLocation getPlayerSkin(net.minecraft.world.entity.Avatar avatar) {
+        return ((net.minecraft.client.entity.ClientAvatarEntity) avatar).getSkin().body().texturePath();
+    }
+    //#endif
+
+    //#if MC >= 12005
+    public static GameProfile getProfile(net.minecraft.world.item.component.ResolvableProfile profile) {
+        //#if MC >= 12109
+        return Minecraft.getInstance().playerSkinRenderCache().getOrDefault(profile).gameProfile();
+        //#else
+        //$$if(profile.isResolved()) {
+        //$$    return profile.gameProfile();
+        //$$} else {
+        //$$    return null;
+        //$$}
+        //#endif
+    }
+    //#endif
+
     public static ResourceLocation getPlayerSkin(GameProfile gameprofile) {
         //#if MC >= 12109
         return Minecraft.getInstance().getSkinManager().get(gameprofile).getNow(Optional.empty())
