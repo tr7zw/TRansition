@@ -4,20 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.spongepowered.asm.mixin.Mixin;
-
-import dev.tr7zw.transition.mc.entitywrapper.EntityRenderStateExtender;
+//#if MC >= 12109
 import dev.tr7zw.transition.mc.extending.ExtensionHolder;
-import lombok.Getter;
-import lombok.Setter;
-//#if MC >= 12102
-import net.minecraft.world.entity.Entity;
+import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
 
-@Mixin(targets = "net.minecraft.client.renderer.entity.state.EntityRenderState")
-public class EntityRenderStateMixin implements EntityRenderStateExtender, ExtensionHolder {
-
-    @Getter
-    @Setter
-    private Entity transitionEntity;
+@Mixin(BlockEntityRenderState.class)
+public class BlockEntityRenderStateMixin implements ExtensionHolder {
 
     private Map<Object, Object> extensionMap = new HashMap<>();
 
@@ -34,5 +26,5 @@ public class EntityRenderStateMixin implements EntityRenderStateExtender, Extens
 }
 //#else
 //$$ @Mixin(targets = "net.minecraft.client.Minecraft") // dummy for older versions
-//$$ public class EntityRenderStateMixin {}
+//$$ public class BlockEntityRenderStateMixin {}
 //#endif

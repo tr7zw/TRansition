@@ -5,7 +5,8 @@
     "client": [
         "EntityRenderStateMixin",
         "ExtensionMixin",
-        "EntityRendererMixin"
+        "EntityRendererMixin",
+        "BlockEntityRenderStateMixin"
     ],
     "injectors": {
         "defaultRequire": 1
