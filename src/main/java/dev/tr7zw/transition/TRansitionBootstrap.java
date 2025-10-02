@@ -35,7 +35,11 @@
 //$$public class TRansitionBootstrap {
 //$$
 //$$    public TRansitionBootstrap() {
+//#if MC < 12109
 //$$        if(FMLEnvironment.dist == Dist.CLIENT) {
+//#else
+//$$        if(FMLEnvironment.getDist() == Dist.CLIENT) {
+//#endif
 //$$         new ClientTRansitionMod().onInitializeClient();
 //$$        }
 //$$        new ClientTRansitionMod().onInitialize();
