@@ -37,6 +37,7 @@ public class PlayerUtil {
 
     //#if MC >= 12005
     public static GameProfile getProfile(net.minecraft.world.item.component.ResolvableProfile profile) {
+        if(profile == null) return null;
         //#if MC >= 12109
         return Minecraft.getInstance().playerSkinRenderCache().getOrDefault(profile).gameProfile();
         //#else
