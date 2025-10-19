@@ -51,6 +51,9 @@ public class PlayerUtil {
     //#endif
 
     public static ResourceLocation getPlayerSkin(GameProfile gameprofile) {
+        if(gameprofile == null) {
+            return null;
+        }
         //#if MC >= 12109
         return Minecraft.getInstance().getSkinManager().get(gameprofile).getNow(Optional.empty())
                 .map(s -> s.body().texturePath()).orElse(null);
@@ -88,5 +91,11 @@ public class PlayerUtil {
             return null;
         }
     }
+    
+    //#if MC >= 12109
+    public static ResourceLocation getPlayerCape(net.minecraft.world.entity.Avatar avatar) {
+        return ((net.minecraft.client.entity.ClientAvatarEntity) avatar).getSkin().cape().texturePath();
+    }
+    //#endif
 
 }
