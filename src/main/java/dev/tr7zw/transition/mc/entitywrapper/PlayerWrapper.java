@@ -1,5 +1,6 @@
 package dev.tr7zw.transition.mc.entitywrapper;
 
+import dev.tr7zw.transition.mc.PlayerUtil;
 //#if MC >= 12109
 import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 //#elseif MC >= 12102
@@ -27,6 +28,11 @@ public class PlayerWrapper extends LivingEntityWrapper {
         super(renderState);
         this.renderState = renderState;
     }
+    
+    public net.minecraft.world.entity.Avatar getAvatar() {
+        return (net.minecraft.world.entity.Avatar) super.getEntity();
+    }
+    
     //#elseif MC >= 12102
     //$$private final PlayerRenderState renderState;
     //$$@Override
@@ -54,7 +60,7 @@ public class PlayerWrapper extends LivingEntityWrapper {
 
     public ResourceLocation getCapeTexture() {
         //#if MC >= 12109
-        return renderState.skin.cape().texturePath();
+        return PlayerUtil.getPlayerCape(getAvatar());
         //#elseif MC >= 12102
         //$$return renderState.skin.capeTexture();
         //#else

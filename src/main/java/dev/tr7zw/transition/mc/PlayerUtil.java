@@ -94,7 +94,11 @@ public class PlayerUtil {
     
     //#if MC >= 12109
     public static ResourceLocation getPlayerCape(net.minecraft.world.entity.Avatar avatar) {
-        return ((net.minecraft.client.entity.ClientAvatarEntity) avatar).getSkin().cape().texturePath();
+        var skin = ((net.minecraft.client.entity.ClientAvatarEntity) avatar).getSkin();
+        if(skin.cape() == null || skin.cape() == null) {
+            return null;
+        }
+        return skin.cape().texturePath();
     }
     //#endif
 
