@@ -1,12 +1,14 @@
 package dev.tr7zw.transition.mc.entitywrapper;
 
 import net.minecraft.world.entity.LivingEntity;
-//#if MC >= 12102
+//? if >= 1.21.2 {
+
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
-//#endif
+//? }
 
 public class LivingEntityWrapper extends EntityWrapper {
-    //#if MC >= 12102
+    //? if >= 1.21.2 {
+
     private final LivingEntityRenderState renderState;
 
     @Override
@@ -18,15 +20,16 @@ public class LivingEntityWrapper extends EntityWrapper {
         super(renderState);
         this.renderState = renderState;
     }
-    //#else
-    //$$private final LivingEntity entity;
-    //$$
-    //$$
-    //$$public LivingEntityWrapper(LivingEntity entity) {
-    //$$        super(entity);
-    //$$        this.entity = entity;
-    //$$}
-    //#endif
+    //? } else {
+/*
+     private final LivingEntity entity;
+    
+    
+     public LivingEntityWrapper(LivingEntity entity) {
+            super(entity);
+            this.entity = entity;
+     }
+    *///? }
 
     @Override
     public LivingEntity getEntity() {

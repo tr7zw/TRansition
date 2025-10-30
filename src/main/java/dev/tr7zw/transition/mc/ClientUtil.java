@@ -10,15 +10,18 @@ public class ClientUtil {
     private final static Minecraft MC = Minecraft.getInstance();
 
     public static void sendChatMessage(Component message) {
-        //#if MC < 11900
-        //$$ if (MC.player != null)
-        //$$ MC.player.sendMessage(message, null);
-        //#elseif MC <= 12101
-        //$$ if (MC.player != null)
-        //$$ MC.player.sendSystemMessage(message);
-        //#else
+        //? if < 1.19.0 {
+/*
+         if (MC.player != null)
+         MC.player.sendMessage(message, null);
+        *///? } else if <= 1.21.1 {
+/*
+         if (MC.player != null)
+         MC.player.sendSystemMessage(message);
+        *///? } else {
+
         MC.getChatListener().handleSystemMessage(message, false);
-        //#endif
+        //? }
     }
 
 }

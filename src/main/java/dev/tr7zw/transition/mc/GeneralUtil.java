@@ -13,33 +13,40 @@ import net.minecraft.world.level.Level;
 @UtilityClass
 public class GeneralUtil {
 
-    //#if MC >= 12109
+    //? if >= 1.21.9 {
+
     private static final Map<String, net.minecraft.client.KeyMapping.Category> categoryCache = new java.util.HashMap<>();
-    //#endif
+    //? }
 
     public static ResourceLocation getResourceLocation(String namespace, String path) {
-        //#if MC >= 12100
+        //? if >= 1.21.0 {
+
         return ResourceLocation.fromNamespaceAndPath(namespace, path);
-        //#else
-        //$$ return new ResourceLocation(namespace, path);
-        //#endif
+        //? } else {
+/*
+         return new ResourceLocation(namespace, path);
+        *///? }
     }
 
     public static ResourceLocation getResourceLocation(String key) {
-        //#if MC >= 12100
+        //? if >= 1.21.0 {
+
         return ResourceLocation.parse(key);
-        //#else
-        //$$ return new ResourceLocation(key);
-        //#endif
+        //? } else {
+/*
+         return new ResourceLocation(key);
+        *///? }
     }
 
     public static KeyMapping createKeyMapping(String keyName, int defaultKey, String category) {
-        //#if MC >= 12109
+        //? if >= 1.21.9 {
+
         return new KeyMapping(keyName, defaultKey, categoryCache.computeIfAbsent(category,
                 c -> new net.minecraft.client.KeyMapping.Category(getResourceLocation(c))));
-        //#else
-        //$$ return new KeyMapping(keyName, defaultKey, category);
-        //#endif
+        //? } else {
+/*
+         return new KeyMapping(keyName, defaultKey, category);
+        *///? }
     }
 
     public static LocalPlayer getPlayer() {
@@ -47,11 +54,13 @@ public class GeneralUtil {
     }
 
     public static Entity getCameraEntity() {
-        //#if MC >= 12109
+        //? if >= 1.21.9 {
+
         return Minecraft.getInstance().getCameraEntity();
-        //#else
-        //$$ return Minecraft.getInstance().cameraEntity;
-        //#endif
+        //? } else {
+/*
+         return Minecraft.getInstance().cameraEntity;
+        *///? }
     }
 
     public static Level getWorld() {

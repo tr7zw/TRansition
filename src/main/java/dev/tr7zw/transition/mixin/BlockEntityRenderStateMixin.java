@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.spongepowered.asm.mixin.Mixin;
-//#if MC >= 12109
+//? if >= 1.21.9 {
+
 import dev.tr7zw.transition.mc.extending.ExtensionHolder;
 import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
 
@@ -24,7 +25,8 @@ public class BlockEntityRenderStateMixin implements ExtensionHolder {
     }
 
 }
-//#else
-//$$ @Mixin(targets = "net.minecraft.client.Minecraft") // dummy for older versions
-//$$ public class BlockEntityRenderStateMixin {}
-//#endif
+//? } else {
+/*
+ @Mixin(targets = "net.minecraft.client.Minecraft") // dummy for older versions
+ public class BlockEntityRenderStateMixin {}
+*///? }

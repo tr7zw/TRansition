@@ -9,7 +9,8 @@ import dev.tr7zw.transition.mc.entitywrapper.EntityRenderStateExtender;
 import dev.tr7zw.transition.mc.extending.ExtensionHolder;
 import lombok.Getter;
 import lombok.Setter;
-//#if MC >= 12102
+//? if >= 1.21.2 {
+
 import net.minecraft.world.entity.Entity;
 
 @Mixin(targets = "net.minecraft.client.renderer.entity.state.EntityRenderState")
@@ -32,7 +33,8 @@ public class EntityRenderStateMixin implements EntityRenderStateExtender, Extens
     }
 
 }
-//#else
-//$$ @Mixin(targets = "net.minecraft.client.Minecraft") // dummy for older versions
-//$$ public class EntityRenderStateMixin {}
-//#endif
+//? } else {
+/*
+ @Mixin(targets = "net.minecraft.client.Minecraft") // dummy for older versions
+ public class EntityRenderStateMixin {}
+*///? }
