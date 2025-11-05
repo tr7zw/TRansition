@@ -14,8 +14,8 @@ import net.minecraft.resources.ResourceLocation;
  import net.minecraft.client.resources.PlayerSkin;
 *///? } else {
 
- import com.mojang.authlib.minecraft.MinecraftProfileTexture;
- import java.util.Map;
+import com.mojang.authlib.minecraft.MinecraftProfileTexture;
+import java.util.Map;
 //? }
 
 @UtilityClass
@@ -26,10 +26,10 @@ public class PlayerUtil {
 
         return player.getSkin().body().texturePath();
         //? } else if >= 1.20.2 {
-/*
+        /*
          return player.getSkin().texture();
         *///? } else {
-/*
+        /*
          return player.getSkinTextureLocation();
         *///? }
     }
@@ -50,7 +50,7 @@ public class PlayerUtil {
 
         return Minecraft.getInstance().playerSkinRenderCache().getOrDefault(profile).gameProfile();
         //? } else {
-/*
+        /*
          if(profile.isResolved()) {
             return profile.gameProfile();
          } else {
@@ -69,14 +69,14 @@ public class PlayerUtil {
         return Minecraft.getInstance().getSkinManager().get(gameprofile).getNow(Optional.empty())
                 .map(s -> s.body().texturePath()).orElse(null);
         //? } else if >= 1.20.2 {
-/*
+        /*
          PlayerSkin playerSkin = Minecraft.getInstance().getSkinManager().getInsecureSkin(gameprofile);
          if (playerSkin.textureUrl() == null) {
             return null;
          }
          return playerSkin.texture();
         *///? } else {
-/*
+        /*
          Map<MinecraftProfileTexture.Type, MinecraftProfileTexture> map = Minecraft.getInstance().getSkinManager()
                  .getInsecureSkinInformation(gameprofile);
          MinecraftProfileTexture texture = map.get(MinecraftProfileTexture.Type.SKIN);
@@ -95,10 +95,10 @@ public class PlayerUtil {
 
             return player.getSkin().cape().texturePath();
             //? } else if >= 1.20.2 {
-/*
+            /*
              return player.getSkin().capeTexture();
             *///? } else {
-/*
+            /*
              return player.getCloakTextureLocation();
             *///? }
         } catch (NullPointerException ignored) {

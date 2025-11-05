@@ -13,7 +13,7 @@ public class InventoryUtil {
 
         return player.getInventory();
         //? } else {
-/*
+        /*
          return player.inventory;
         *///? }
     }
@@ -23,8 +23,8 @@ public class InventoryUtil {
 
         return inventory.getSelectedItem();
         //? } else {
-/*
-         return inventory.getSelected();
+        /*
+        return inventory.getSelected();
         *///? }
     }
 
@@ -33,8 +33,8 @@ public class InventoryUtil {
 
         return inventory.getItem(Inventory.SLOT_OFFHAND);
         //? } else {
-/*
-         return inventory.offhand.get(0);
+        /*
+        return inventory.offhand.get(0);
         *///? }
     }
 
@@ -43,8 +43,8 @@ public class InventoryUtil {
 
         return inventory.getSelectedSlot();
         //? } else {
-/*
-         return inventory.selected;
+        /*
+        return inventory.selected;
         *///? }
     }
 
@@ -53,8 +53,8 @@ public class InventoryUtil {
 
         return inventory.getNonEquipmentItems();
         //? } else {
-/*
-         return inventory.items;
+        /*
+        return inventory.items;
         *///? }
     }
 

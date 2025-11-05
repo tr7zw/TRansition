@@ -23,7 +23,7 @@ public class GeneralUtil {
 
         return ResourceLocation.fromNamespaceAndPath(namespace, path);
         //? } else {
-/*
+        /*
          return new ResourceLocation(namespace, path);
         *///? }
     }
@@ -33,7 +33,7 @@ public class GeneralUtil {
 
         return ResourceLocation.parse(key);
         //? } else {
-/*
+        /*
          return new ResourceLocation(key);
         *///? }
     }
@@ -44,7 +44,7 @@ public class GeneralUtil {
         return new KeyMapping(keyName, defaultKey, categoryCache.computeIfAbsent(category,
                 c -> new net.minecraft.client.KeyMapping.Category(getResourceLocation(c))));
         //? } else {
-/*
+        /*
          return new KeyMapping(keyName, defaultKey, category);
         *///? }
     }
@@ -58,7 +58,7 @@ public class GeneralUtil {
 
         return Minecraft.getInstance().getCameraEntity();
         //? } else {
-/*
+        /*
          return Minecraft.getInstance().cameraEntity;
         *///? }
     }

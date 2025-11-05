@@ -11,11 +11,11 @@ public class ClientUtil {
 
     public static void sendChatMessage(Component message) {
         //? if < 1.19.0 {
-/*
+        /*
          if (MC.player != null)
          MC.player.sendMessage(message, null);
         *///? } else if <= 1.21.1 {
-/*
+        /*
          if (MC.player != null)
          MC.player.sendSystemMessage(message);
         *///? } else {

@@ -34,7 +34,7 @@ public class EntityUtil {
 
         return ent.getXRot();
         //? } else {
-/*
+        /*
          return ent.xRot;
         *///? }
     }
@@ -44,7 +44,7 @@ public class EntityUtil {
 
         return ent.getYRot();
         //? } else {
-/*
+        /*
          return ent.yRot;
         *///? }
     }
@@ -54,7 +54,7 @@ public class EntityUtil {
 
         ent.setXRot(xRot);
         //? } else {
-/*
+        /*
          ent.xRot = xRot;
         *///? }
     }
@@ -64,7 +64,7 @@ public class EntityUtil {
 
         ent.setYRot(yRot);
         //? } else {
-/*
+        /*
          ent.yRot = yRot;
         *///? }
     }

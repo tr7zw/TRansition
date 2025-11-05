@@ -6,7 +6,7 @@ import dev.tr7zw.transition.mc.PlayerUtil;
 import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 //? } else if >= 1.21.2 {
 /*
- import net.minecraft.client.renderer.entity.state.PlayerRenderState;
+import net.minecraft.client.renderer.entity.state.PlayerRenderState;
 *///? } else {
 /*
  import net.minecraft.client.player.AbstractClientPlayer;
@@ -38,18 +38,20 @@ public class PlayerWrapper extends LivingEntityWrapper {
     }
 
     //? } else if >= 1.21.2 {
-/*
-     private final PlayerRenderState renderState;
-     @Override
-     public PlayerRenderState getRenderState() {
+    /*
+    private final PlayerRenderState renderState;
+    
+    @Override
+    public PlayerRenderState getRenderState() {
         return renderState;
-     }
-     public PlayerWrapper(PlayerRenderState renderState) {
+    }
+    
+    public PlayerWrapper(PlayerRenderState renderState) {
         super(renderState);
         this.renderState = renderState;
-     }
+    }
     *///? } else {
-/*
+    /*
      private final AbstractClientPlayer player;
     
     
@@ -69,10 +71,10 @@ public class PlayerWrapper extends LivingEntityWrapper {
 
         return PlayerUtil.getPlayerCape(getAvatar());
         //? } else if >= 1.21.2 {
-/*
-         return renderState.skin.capeTexture();
+        /*
+        return renderState.skin.capeTexture();
         *///? } else {
-/*
+        /*
          return PlayerUtil.getPlayerCape(player);
         *///? }
     }
@@ -82,7 +84,7 @@ public class PlayerWrapper extends LivingEntityWrapper {
 
         return renderState.isInvisible;
         //? } else {
-/*
+        /*
          return player.isInvisible();
         *///? }
     }
@@ -92,7 +94,7 @@ public class PlayerWrapper extends LivingEntityWrapper {
 
         return renderState.showCape && !isPlayerInvisible();
         //? } else {
-/*
+        /*
          return player.isModelPartShown(PlayerModelPart.CAPE);
         *///? }
     }
@@ -102,10 +104,10 @@ public class PlayerWrapper extends LivingEntityWrapper {
 
         return renderState.chestEquipment.is(Items.ELYTRA);
         //? } else if >= 1.21.2 {
-/*
-         return renderState.chestItem.is(Items.ELYTRA);
+        /*
+        return renderState.chestItem.is(Items.ELYTRA);
         *///? } else {
-/*
+        /*
          return player.getItemBySlot(EquipmentSlot.CHEST).getItem().equals(Items.ELYTRA);
         *///? }
     }
@@ -115,10 +117,10 @@ public class PlayerWrapper extends LivingEntityWrapper {
 
         return !hasElytraEquipped() && !renderState.chestEquipment.isEmpty();
         //? } else if >= 1.21.2 {
-/*
-         return !hasElytraEquipped() && !renderState.chestItem.isEmpty();
+        /*
+        return !hasElytraEquipped() && !renderState.chestItem.isEmpty();
         *///? } else {
-/*
+        /*
          return !hasElytraEquipped() && !player.getItemBySlot(EquipmentSlot.CHEST).isEmpty();
         *///? }
     }

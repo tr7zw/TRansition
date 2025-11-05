@@ -21,7 +21,7 @@ public class LivingEntityWrapper extends EntityWrapper {
         this.renderState = renderState;
     }
     //? } else {
-/*
+    /*
      private final LivingEntity entity;
     
     

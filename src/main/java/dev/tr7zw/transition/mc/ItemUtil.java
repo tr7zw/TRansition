@@ -20,13 +20,13 @@ import net.minecraft.core.registries.BuiltInRegistries;
 /*
  import net.minecraft.core.Registry;
 *///? }
-//? if <= 1.20.4 {
-/*
- import net.minecraft.Util;
- import org.apache.commons.lang3.StringUtils;
- import net.minecraft.nbt.CompoundTag;
- import net.minecraft.nbt.NbtUtils;
-*///? } else {
+   //? if <= 1.20.4 {
+   /*
+    import net.minecraft.Util;
+    import org.apache.commons.lang3.StringUtils;
+    import net.minecraft.nbt.CompoundTag;
+    import net.minecraft.nbt.NbtUtils;
+   *///? } else {
 
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.ResolvableProfile;
@@ -40,10 +40,10 @@ public class ItemUtil {
 
         return BuiltInRegistries.ITEM.get(key).map(net.minecraft.core.Holder.Reference::value).orElse(Items.AIR);
         //? } else if >= 1.19.3 {
-/*
+        /*
          return BuiltInRegistries.ITEM.get(key);
         *///? } else {
-/*
+        /*
          return Registry.ITEM.get(key);
         *///? }
     }
@@ -53,7 +53,7 @@ public class ItemUtil {
 
         return BuiltInRegistries.ITEM.entrySet();
         //? } else {
-/*
+        /*
          return Registry.ITEM.entrySet();
         *///? }
     }
@@ -70,26 +70,26 @@ public class ItemUtil {
         }
         return null;
         //? } else if >= 1.20.5 {
-/*
-         if (itemStack.getComponents().has(DataComponents.CUSTOM_MODEL_DATA)) {
+        /*
+        if (itemStack.getComponents().has(DataComponents.CUSTOM_MODEL_DATA)) {
             return null;
-         }
-         if (itemStack.getComponents().has(DataComponents.PROFILE)) {
+        }
+        if (itemStack.getComponents().has(DataComponents.PROFILE)) {
             ResolvableProfile resolvableProfile = (ResolvableProfile) itemStack.get(DataComponents.PROFILE);
             if (resolvableProfile != null && !resolvableProfile.isResolved()) {
                 itemStack.remove(DataComponents.PROFILE);
-               resolvableProfile.resolve().thenAcceptAsync(
-                       resolvableProfile2 -> itemStack.set(DataComponents.PROFILE, resolvableProfile2),
+                resolvableProfile.resolve().thenAcceptAsync(
+                        resolvableProfile2 -> itemStack.set(DataComponents.PROFILE, resolvableProfile2),
                         Minecraft.getInstance());
-               resolvableProfile = null;
-           }
-            if (resolvableProfile != null) {
-               return resolvableProfile.gameProfile();
+                resolvableProfile = null;
             }
-         }
-         return null;
+            if (resolvableProfile != null) {
+                return resolvableProfile.gameProfile();
+            }
+        }
+        return null;
         *///? } else {
-/*
+        /*
          if (itemStack.hasTag()) {
              CompoundTag compoundTag = itemStack.getTag();
              if (compoundTag.contains("CustomModelData")) {
@@ -108,10 +108,10 @@ public class ItemUtil {
 
     public static boolean isSame(ItemStack a, ItemStack b) {
         //? if < 1.17.0 {
-/*
+        /*
          return ItemStack.isSame(a, b);
         *///? } else if <= 1.20.4 {
-/*
+        /*
          return ItemStack.isSameItemSameTags(a, b);
         *///? } else {
 
@@ -121,7 +121,7 @@ public class ItemUtil {
 
     public static boolean hasCustomName(ItemStack stack) {
         //? if <= 1.20.4 {
-/*
+        /*
          return stack.hasCustomHoverName();
         *///? } else {
 

@@ -13,7 +13,7 @@ import lombok.Setter;
 
 import net.minecraft.world.entity.Entity;
 
-@Mixin(targets = "net.minecraft.client.renderer.entity.state.EntityRenderState")
+@Mixin(net.minecraft.client.renderer.entity.state.EntityRenderState.class)
 public class EntityRenderStateMixin implements EntityRenderStateExtender, ExtensionHolder {
 
     @Getter

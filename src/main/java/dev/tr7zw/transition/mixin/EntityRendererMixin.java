@@ -11,7 +11,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import dev.tr7zw.transition.mc.entitywrapper.EntityRenderStateExtender;
 
-@Mixin(targets = "net.minecraft.client.renderer.entity.EntityRenderer")
+@Mixin(net.minecraft.client.renderer.entity.EntityRenderer.class)
 public class EntityRendererMixin {
 
     @Inject(method = "extractRenderState", at = @At("RETURN"))

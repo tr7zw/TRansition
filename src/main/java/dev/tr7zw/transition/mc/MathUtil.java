@@ -29,7 +29,7 @@ public class MathUtil {
     public static Axis ZN = f -> new Quaternionf().rotationZ(-f);
     public static Axis ZP = f -> new Quaternionf().rotationZ(f);
     //? } else {
-/*
+    /*
      public static Vector3f XN = new Vector3f(-1.0F, 0.0F, 0.0F);
      public static Vector3f XP = new Vector3f(1.0F, 0.0F, 0.0F);
      public static Vector3f YN = new Vector3f(0.0F, -1.0F, 0.0F);
@@ -43,7 +43,7 @@ public class MathUtil {
     public static void conjugate(Quaternionf quaternion2) {
         quaternion2.conjugate();
         //? } else {
-/*
+        /*
          public static void conjugate(Quaternion quaternion2) {
          quaternion2.conj();
         *///? }

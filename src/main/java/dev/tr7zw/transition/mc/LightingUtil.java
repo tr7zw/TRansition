@@ -5,7 +5,7 @@ package dev.tr7zw.transition.mc;
 import com.mojang.blaze3d.platform.Lighting.Entry;
 //? } else {
 /*
- import com.mojang.blaze3d.platform.Lighting;
+import com.mojang.blaze3d.platform.Lighting;
 *///? }
 
 import net.minecraft.client.Minecraft;
@@ -17,10 +17,10 @@ public class LightingUtil {
 
         Minecraft.getInstance().gameRenderer.getLighting().setupFor(Entry.ENTITY_IN_UI);
         //? } else if >= 1.17.0 {
-/*
-         Lighting.setupForEntityInInventory();
+        /*
+        Lighting.setupForEntityInInventory();
         *///? } else {
-/*
+        /*
          Lighting.setupForFlatItems();
         *///? }
     }

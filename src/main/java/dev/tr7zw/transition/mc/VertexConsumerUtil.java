@@ -26,7 +26,7 @@ public class VertexConsumerUtil {
 
         cons.addVertex(matrix4f, x, y, z).setColor(255, 255, 255, 255).setUv(u, v).setUv2(u2, v2);
         //? } else {
-/*
+        /*
          cons.vertex(matrix4f, x, y, z).color(1f, 1f, 1f, 1f).uv(u, v).uv2(u2, v2)
          .endVertex();
         *///? }
@@ -37,7 +37,7 @@ public class VertexConsumerUtil {
 
         cons.addVertex(matrix4f, x, y, z).setColor(255, 255, 255, 255).setUv(u, v);
         //? } else {
-/*
+        /*
          cons.vertex(matrix4f, x, y, z).color(1f, 1f, 1f, 1f).uv(u, v).endVertex();
         *///? }
     }
@@ -65,7 +65,7 @@ public class VertexConsumerUtil {
         cons.addVertex(matrix4f, x, y, z).setColor(255, 255, 255, alpha).setUv(u, v).setUv2(u2, v2).setOverlay(overlay)
                 .setNormal(nx, ny, nz);
         //? } else {
-/*
+        /*
          cons.vertex(matrix4f, x, y, z).color(1f, 1f, 1f, alpha / 255f).uv(u, v).overlayCoords(overlay).uv2(u2, v2).normal(nx, ny, nz)
          .endVertex();
         *///? }

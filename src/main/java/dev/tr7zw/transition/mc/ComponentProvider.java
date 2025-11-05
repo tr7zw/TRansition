@@ -29,7 +29,7 @@ public class ComponentProvider {
     public static MutableComponent literal(String string) {
         return Component.literal(string);
         //? } else {
-/*
+        /*
          public static TextComponent literal(String string) {
          return new TextComponent(string);
         *///? }
@@ -40,7 +40,7 @@ public class ComponentProvider {
     public static MutableComponent translatable(String string) {
         return Component.translatable(string);
         //? } else {
-/*
+        /*
          public static TranslatableComponent translatable(String string) {
          return new TranslatableComponent(string);
         *///? }
@@ -51,7 +51,7 @@ public class ComponentProvider {
     public static MutableComponent translatable(String string, Object... objects) {
         return Component.translatable(string, objects);
         //? } else {
-/*
+        /*
          public static TranslatableComponent translatable(String string, Object... objects) {
          return new TranslatableComponent(string, objects);
         *///? }
@@ -62,7 +62,7 @@ public class ComponentProvider {
     public static MutableComponent empty() {
         return Component.empty();
         //? } else {
-/*
+        /*
          public static Component empty() {
          return TextComponent.EMPTY;
         *///? }
