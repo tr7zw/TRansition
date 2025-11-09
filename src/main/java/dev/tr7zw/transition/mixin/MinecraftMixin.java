@@ -18,9 +18,20 @@ public class MinecraftMixin {
         SentryInstance.forceFlush();
     }
 
+    //? if >= 1.18.0 {
+
     @Inject(method = "fillReport(Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/resources/language/LanguageManager;Ljava/lang/String;Lnet/minecraft/client/Options;Lnet/minecraft/CrashReport;)V", at = @At("HEAD"), require = 0)
-    private static void fillReport(Minecraft minecraft, LanguageManager languageManager, String launchVersion,
-            Options options, CrashReport report, CallbackInfo ci) {
+    //? } else {
+    /*
+    @Inject(method = "fillReport(Lnet/minecraft/client/resources/language/LanguageManager;Ljava/lang/String;Lnet/minecraft/client/Options;Lnet/minecraft/CrashReport;)V", at = @At("HEAD"), require = 0)
+    *///? }
+    private static void fillReport(
+            //? if  >= 1.18.0 {
+
+            Minecraft minecraft,
+            //? }
+            LanguageManager languageManager, String launchVersion, Options options, CrashReport report,
+            CallbackInfo ci) {
         SentryInstance.maybeReport("CrashReport", Thread.currentThread().getName(), report.getExceptionMessage(),
                 report.getException());
         SentryInstance.forceFlush();
