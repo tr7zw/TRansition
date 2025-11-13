@@ -3,7 +3,7 @@ source: "https://github.com/tr7zw/ProcessedModTemplate/tree/stonecutter"
 replacements:
   name: "TRansition"
   id: "transition"
-  version: "1.0.9"
+  version: "1.0.10"
   description: "Library to transition between Modloaders and Minecraft versions"
   homepageUrl: "https://github.com/tr7zw/TRansition"
   sourcesUrl: "https://github.com/tr7zw/TRansition"

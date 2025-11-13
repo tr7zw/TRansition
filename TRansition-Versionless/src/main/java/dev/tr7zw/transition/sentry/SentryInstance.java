@@ -39,6 +39,23 @@ public class SentryInstance {
             options.setTag("loader", INSTANCE.dataProvider.getModloader());
             options.setEnvironment("production");
             options.setSendDefaultPii(false); // don't send personal info
+            options.setBeforeSend((event, hint) -> {
+                // Sentry captures unhandled exceptions from all mods, we only want ours
+                if (event.getThrowable() != null && event.isCrashed()) {
+                    boolean relatedToMod = false;
+                    Throwable t = event.getThrowable();
+
+                    while (t != null && !relatedToMod) {
+                        relatedToMod = Arrays.stream(t.getStackTrace()).anyMatch(e -> e.getClassName().startsWith("dev.tr7zw"));
+                        t = t.getCause();
+                    }
+
+                    if (!relatedToMod)
+                        return null; // drop the event entirely
+                }
+                return event;
+            });
+
         });
         logger.info("Setup Sentry for error reporting");
     }
