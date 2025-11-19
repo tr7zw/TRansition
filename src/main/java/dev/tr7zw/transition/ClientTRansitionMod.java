@@ -1,6 +1,7 @@
 package dev.tr7zw.transition;
 
 import dev.tr7zw.transition.config.*;
+import dev.tr7zw.transition.mc.*;
 import dev.tr7zw.transition.sentry.*;
 import net.minecraft.client.*;
 import org.apache.logging.log4j.*;
@@ -29,7 +30,7 @@ public class ClientTRansitionMod
     public void onInitializeClient() {
 
         SentryInstance.initialize(new SentryDataProviderImpl());
-
+        
     }
 
     public void onInitialize() {

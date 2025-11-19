@@ -46,7 +46,8 @@ public class SentryInstance {
                     Throwable t = event.getThrowable();
 
                     while (t != null && !relatedToMod) {
-                        relatedToMod = Arrays.stream(t.getStackTrace()).anyMatch(e -> e.getClassName().startsWith("dev.tr7zw"));
+                        relatedToMod = Arrays.stream(t.getStackTrace())
+                                .anyMatch(e -> e.getClassName().startsWith("dev.tr7zw"));
                         t = t.getCause();
                     }
 

@@ -14,9 +14,9 @@ import net.minecraft.client.renderer.entity.state.PlayerRenderState;
  import net.minecraft.world.entity.player.PlayerModelPart;
  import dev.tr7zw.transition.mc.PlayerUtil;
 *///? }
+import net.minecraft.resources.*;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.resources.ResourceLocation;
 
 public class PlayerWrapper extends LivingEntityWrapper {
     //? if >= 1.21.9 {
@@ -66,7 +66,7 @@ public class PlayerWrapper extends LivingEntityWrapper {
         return (Player) super.getEntity();
     }
 
-    public ResourceLocation getCapeTexture() {
+    public /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ getCapeTexture() {
         //? if >= 1.21.9 {
 
         return PlayerUtil.getPlayerCape(getAvatar());

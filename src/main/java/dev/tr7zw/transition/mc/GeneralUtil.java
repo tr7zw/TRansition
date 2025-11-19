@@ -6,7 +6,7 @@ import lombok.experimental.UtilityClass;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.*;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 
@@ -18,21 +18,29 @@ public class GeneralUtil {
     private static final Map<String, net.minecraft.client.KeyMapping.Category> categoryCache = new java.util.HashMap<>();
     //? }
 
-    public static ResourceLocation getResourceLocation(String namespace, String path) {
-        //? if >= 1.21.0 {
+    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ getResourceLocation(
+            String namespace, String path) {
+        //? if >= 1.21.11 {
 
+        return Identifier.fromNamespaceAndPath(namespace, path);
+        //? } else if >= 1.21.0 {
+        /*
         return ResourceLocation.fromNamespaceAndPath(namespace, path);
-        //? } else {
+        *///? } else {
         /*
          return new ResourceLocation(namespace, path);
         *///? }
     }
 
-    public static ResourceLocation getResourceLocation(String key) {
-        //? if >= 1.21.0 {
+    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ getResourceLocation(
+            String key) {
+        //? if >= 1.21.11 {
 
+        return Identifier.parse(key);
+        //? } else if >= 1.21.0 {
+        /*
         return ResourceLocation.parse(key);
-        //? } else {
+        *///? } else {
         /*
          return new ResourceLocation(key);
         *///? }

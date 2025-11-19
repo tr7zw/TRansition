@@ -7,8 +7,7 @@ import com.mojang.authlib.GameProfile;
 
 import lombok.experimental.UtilityClass;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -35,7 +34,7 @@ import net.minecraft.world.item.component.ResolvableProfile;
 @UtilityClass
 public class ItemUtil {
 
-    public static Item getItem(ResourceLocation key) {
+    public static Item getItem(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ key) {
         //? if >= 1.21.2 {
 
         return BuiltInRegistries.ITEM.get(key).map(net.minecraft.core.Holder.Reference::value).orElse(Items.AIR);

@@ -7,7 +7,7 @@ import com.mojang.authlib.GameProfile;
 import lombok.experimental.UtilityClass;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.*;
 
 //? if >= 1.20.2 && < 1.21.9 {
 /*
@@ -21,7 +21,8 @@ import java.util.Map;
 @UtilityClass
 public class PlayerUtil {
 
-    public static ResourceLocation getPlayerSkin(AbstractClientPlayer player) {
+    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ getPlayerSkin(
+            AbstractClientPlayer player) {
         //? if >= 1.21.9 {
 
         return player.getSkin().body().texturePath();
@@ -36,7 +37,8 @@ public class PlayerUtil {
 
     //? if >= 1.21.9 {
 
-    public static ResourceLocation getPlayerSkin(net.minecraft.world.entity.Avatar avatar) {
+    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ getPlayerSkin(
+            net.minecraft.world.entity.Avatar avatar) {
         return ((net.minecraft.client.entity.ClientAvatarEntity) avatar).getSkin().body().texturePath();
     }
     //? }
@@ -60,7 +62,8 @@ public class PlayerUtil {
     }
     //? }
 
-    public static ResourceLocation getPlayerSkin(GameProfile gameprofile) {
+    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ getPlayerSkin(
+            GameProfile gameprofile) {
         if (gameprofile == null) {
             return null;
         }
@@ -89,7 +92,8 @@ public class PlayerUtil {
         *///? }
     }
 
-    public static ResourceLocation getPlayerCape(AbstractClientPlayer player) {
+    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ getPlayerCape(
+            AbstractClientPlayer player) {
         try {
             //? if >= 1.21.9 {
 
@@ -110,7 +114,8 @@ public class PlayerUtil {
 
     //? if >= 1.21.9 {
 
-    public static ResourceLocation getPlayerCape(net.minecraft.world.entity.Avatar avatar) {
+    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ getPlayerCape(
+            net.minecraft.world.entity.Avatar avatar) {
         var skin = ((net.minecraft.client.entity.ClientAvatarEntity) avatar).getSkin();
         if (skin.cape() == null || skin.cape() == null) {
             return null;

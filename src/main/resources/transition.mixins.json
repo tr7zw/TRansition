@@ -7,7 +7,8 @@
         "ExtensionMixin",
         "EntityRendererMixin",
         "BlockEntityRenderStateMixin",
-        "MinecraftMixin"
+        "MinecraftMixin",
+        "EntityAccessor"
     ],
     "injectors": {
         "defaultRequire": 1
