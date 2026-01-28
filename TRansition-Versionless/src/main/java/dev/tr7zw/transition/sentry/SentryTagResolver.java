@@ -8,9 +8,11 @@ import java.util.*;
 public class SentryTagResolver {
 
     private static final Map<String, String> MAPPINGS = new HashMap<>();
+    private static final Set<String> FORBIDDEN_MODS = new HashSet<>();
 
     static {
         MAPPINGS.put("dev.tr7zw.transition", "TRansition");
+        MAPPINGS.put("dev.tr7zw.trender", "TRender");
         MAPPINGS.put("dev.tr7zw.entityculling", "EntityCulling");
         MAPPINGS.put("com.logisticscraft.occlusionculling", "EntityCulling");
         MAPPINGS.put("dev.tr7zw.skinlayers", "3dSkinLayers");
@@ -24,6 +26,7 @@ public class SentryTagResolver {
         MAPPINGS.put("dev.tr7zw.graphutil", "GraphUtil");
         MAPPINGS.put("dev.tr7zw.paperdoll", "PaperDoll");
         MAPPINGS.put("dev.tr7zw.modeldumper", "ModelDumper");
+        FORBIDDEN_MODS.add("org.tlauncher");
     }
 
     public static String findSuspectMod(Throwable throwable) {
@@ -32,6 +35,12 @@ public class SentryTagResolver {
         while (t != null) {
             for (var e : t.getStackTrace()) {
                 String name = e.getClassName();
+                for (String forbidden : FORBIDDEN_MODS) {
+                    if (name.startsWith(forbidden)) {
+                        // Not reporting crashes caused by forbidden mods
+                        return "ForbiddenMod";
+                    }
+                }
                 for (var entry : MAPPINGS.entrySet()) {
                     if (name.startsWith(entry.getKey())) {
                         return entry.getValue();

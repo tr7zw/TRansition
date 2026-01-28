@@ -81,42 +81,53 @@ public class SentryInstance {
     }
 
     public static boolean maybeReport(String loggerName, String thread, String message, Throwable throwable) {
-        if (INSTANCE.dataProvider == null || !INSTANCE.dataProvider.userConsentedToCrashReports())
+        try {
+            if (INSTANCE.dataProvider == null || !INSTANCE.dataProvider.userConsentedToCrashReports())
+                return false;
+
+            boolean relatedToMod = false;
+            Throwable t = throwable;
+
+            while (t != null && !relatedToMod) {
+                relatedToMod = Arrays.stream(t.getStackTrace()).anyMatch(e -> e.getClassName().startsWith("dev.tr7zw"));
+                t = t.getCause();
+            }
+
+            if (!relatedToMod)
+                return false;
+
+            if (INSTANCE.seenMessages.contains(throwable.getMessage())) {
+                return false;
+            }
+
+            INSTANCE.seenMessages.add(throwable.getMessage());
+
+            String suspectMod = SentryTagResolver.findSuspectMod(throwable);
+            if ("ForbiddenMod".equals(suspectMod)) {
+                // Don't report crashes caused by known incompatible mods
+                return false;
+            }
+
+            // Attach context info
+            Sentry.configureScope(scope -> {
+                scope.setContexts("loaded_mods", INSTANCE.dataProvider.getLoadedMods());
+                scope.setContexts("Message", message);
+                scope.setTag("suspectMod", suspectMod);
+                scope.setTag("Logger", loggerName);
+                scope.setTag("Thread", thread);
+                scope.setTag("hasPlayer", Boolean.toString(INSTANCE.dataProvider.hasPlayer()));
+                scope.setTag("LevelType", INSTANCE.dataProvider.getLevelType());
+                scope.setTag("Screen", INSTANCE.dataProvider.getScreen());
+                scope.setLevel("CrashReport".equals(loggerName) ? SentryLevel.FATAL : SentryLevel.ERROR);
+            });
+
+            var id = Sentry.captureException(throwable);
+            logger.info("Logged to Sentry {}", id);
+            return true;
+        } catch (Exception ex) {
+            logger.error("Failed to report to Sentry {}", ex.getMessage());
             return false;
-
-        boolean relatedToMod = false;
-        Throwable t = throwable;
-
-        while (t != null && !relatedToMod) {
-            relatedToMod = Arrays.stream(t.getStackTrace()).anyMatch(e -> e.getClassName().startsWith("dev.tr7zw"));
-            t = t.getCause();
         }
-
-        if (!relatedToMod)
-            return false;
-
-        if (INSTANCE.seenMessages.contains(throwable.getMessage())) {
-            return false;
-        }
-
-        INSTANCE.seenMessages.add(throwable.getMessage());
-
-        // Attach context info
-        Sentry.configureScope(scope -> {
-            scope.setContexts("loaded_mods", INSTANCE.dataProvider.getLoadedMods());
-            scope.setContexts("Message", message);
-            scope.setTag("suspectMod", SentryTagResolver.findSuspectMod(throwable));
-            scope.setTag("Logger", loggerName);
-            scope.setTag("Thread", thread);
-            scope.setTag("hasPlayer", Boolean.toString(INSTANCE.dataProvider.hasPlayer()));
-            scope.setTag("LevelType", INSTANCE.dataProvider.getLevelType());
-            scope.setTag("Screen", INSTANCE.dataProvider.getScreen());
-            scope.setLevel("CrashReport".equals(loggerName) ? SentryLevel.FATAL : SentryLevel.ERROR);
-        });
-
-        var id = Sentry.captureException(throwable);
-        logger.info("Logged to Sentry {}", id);
-        return true;
     }
 
     public static void forceFlush() {

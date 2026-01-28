@@ -30,7 +30,7 @@ public class ClientTRansitionMod
     public void onInitializeClient() {
 
         SentryInstance.initialize(new SentryDataProviderImpl());
-        
+
     }
 
     public void onInitialize() {
