@@ -116,6 +116,9 @@ public class PlayerUtil {
 
     public static /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ getPlayerCape(
             net.minecraft.world.entity.Avatar avatar) {
+        if (avatar == null) {
+            return null;
+        }
         var skin = ((net.minecraft.client.entity.ClientAvatarEntity) avatar).getSkin();
         if (skin.cape() == null || skin.cape() == null) {
             return null;
