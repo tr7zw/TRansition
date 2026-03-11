@@ -34,7 +34,7 @@ public class PlayerWrapper extends LivingEntityWrapper {
     }
 
     public net.minecraft.world.entity.Avatar getAvatar() {
-        if ( super.getEntity() instanceof net.minecraft.world.entity.Avatar avatar) {
+        if (super.getEntity() instanceof net.minecraft.world.entity.Avatar avatar) {
             return avatar;
         }
         return null;

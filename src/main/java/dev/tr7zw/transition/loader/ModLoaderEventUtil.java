@@ -144,133 +144,149 @@ public class ModLoaderEventUtil {
     public static void registerWorldTickStartListener(Runnable runnable) {
         //? if fabric {
 
+        //? if >= 26.0 {
+
+        ClientTickEvents.START_LEVEL_TICK.register(e -> {
+            runnable.run();
+        });
+        //}? else {
+        /*
         ClientTickEvents.START_WORLD_TICK.register(e -> {
             runnable.run();
         });
-        //? } else if forge {
-        /*
-        //? if >= 1.21.6 {
-        
-          LevelTickEvent.Pre.BUS.addListener(new Consumer<LevelTickEvent.Pre>() {
-             @Override
-             public void accept(LevelTickEvent.Pre t) {
-                     runnable.run();
-            }
-          });
-         //? } else if >= 1.19.0 {
-        /^
-        MinecraftForge.EVENT_BUS.addListener(new Consumer<LevelTickEvent>() {
-        
-            @Override
-            public void accept(LevelTickEvent t) {
-                if (t.phase != LevelTickEvent.Phase.START)
-                    return;
-                runnable.run();
-            }
-        
-        });
-        ^///? } else {
-        /^
-          MinecraftForge.EVENT_BUS.addListener(new Consumer<WorldTickEvent>() {
-         
-             @Override
-             public void accept(WorldTickEvent t) {
-             if (t.phase != WorldTickEvent.Phase.START) return;
-                     runnable.run();
-             }
-             
-          });
-         ^///? }
-            *///? } else if neoforge {
-        /*
-         //? if >= 1.20.5 {
-        
-            NeoForge.EVENT_BUS.addListener(new Consumer<net.neoforged.neoforge.event.tick.LevelTickEvent.Pre>() {
+        *///? }
+           //? } else if forge {
+           /*
+           //? if >= 1.21.6 {
            
-                 @Override
-                public void accept(net.neoforged.neoforge.event.tick.LevelTickEvent.Pre t) {
+             LevelTickEvent.Pre.BUS.addListener(new Consumer<LevelTickEvent.Pre>() {
+                @Override
+                public void accept(LevelTickEvent.Pre t) {
                         runnable.run();
-                }
+               }
+             });
+            //? } else if >= 1.19.0 {
+           /^
+           MinecraftForge.EVENT_BUS.addListener(new Consumer<LevelTickEvent>() {
+           
+               @Override
+               public void accept(LevelTickEvent t) {
+                   if (t.phase != LevelTickEvent.Phase.START)
+                       return;
+                   runnable.run();
+               }
            
            });
-         //? } else {
-        /^
-           NeoForge.EVENT_BUS.addListener(new Consumer<net.neoforged.neoforge.event.TickEvent.LevelTickEvent>() {
-              
-                     @Override
-                     public void accept(net.neoforged.neoforge.event.TickEvent.LevelTickEvent t) {
-                             runnable.run();
-                     }
-                     
+           ^///? } else {
+           /^
+             MinecraftForge.EVENT_BUS.addListener(new Consumer<WorldTickEvent>() {
+            
+                @Override
+                public void accept(WorldTickEvent t) {
+                if (t.phase != WorldTickEvent.Phase.START) return;
+                        runnable.run();
+                }
+                
              });
-         ^///? }
-        *///? }
+            ^///? }
+               *///? } else if neoforge {
+           /*
+            //? if >= 1.20.5 {
+           
+               NeoForge.EVENT_BUS.addListener(new Consumer<net.neoforged.neoforge.event.tick.LevelTickEvent.Pre>() {
+              
+                    @Override
+                   public void accept(net.neoforged.neoforge.event.tick.LevelTickEvent.Pre t) {
+                           runnable.run();
+                   }
+              
+              });
+            //? } else {
+           /^
+              NeoForge.EVENT_BUS.addListener(new Consumer<net.neoforged.neoforge.event.TickEvent.LevelTickEvent>() {
+                 
+                        @Override
+                        public void accept(net.neoforged.neoforge.event.TickEvent.LevelTickEvent t) {
+                                runnable.run();
+                        }
+                        
+                });
+            ^///? }
+           *///? }
     }
 
     public static void registerWorldTickEndListener(Runnable runnable) {
         //? if fabric {
 
+        //? if >= 26.0 {
+
+        ClientTickEvents.END_LEVEL_TICK.register(e -> {
+            runnable.run();
+        });
+        //}? else {
+        /*
         ClientTickEvents.END_WORLD_TICK.register(e -> {
             runnable.run();
         });
-        //? } else if forge {
-        /*
-        //? if >= 1.21.6 {
-        
-          LevelTickEvent.Post.BUS.addListener(new Consumer<LevelTickEvent.Post>() {
-             @Override
-             public void accept(LevelTickEvent.Post t) {
-                     runnable.run();
-            }
-          });
-         //? } else if >= 1.19.0 {
-        /^
-        MinecraftForge.EVENT_BUS.addListener(new Consumer<LevelTickEvent>() {
-        
-            @Override
-            public void accept(LevelTickEvent t) {
-                if (t.phase != LevelTickEvent.Phase.END)
-                    return;
-                runnable.run();
-            }
-        
-        });
-        ^///? } else {
-        /^
-          MinecraftForge.EVENT_BUS.addListener(new Consumer<WorldTickEvent>() {
-         
-             @Override
-             public void accept(WorldTickEvent t) {
-             if (t.phase != WorldTickEvent.Phase.END) return;
-                     runnable.run();
-             }
-             
-          });
-         ^///? }
-            *///? } else if neoforge {
-        /*
-         //? if >= 1.20.5 {
-        
-            NeoForge.EVENT_BUS.addListener(new Consumer<net.neoforged.neoforge.event.tick.LevelTickEvent.Post>() {
+        *///? }
+           //? } else if forge {
+           /*
+           //? if >= 1.21.6 {
            
-                 @Override
-                public void accept(net.neoforged.neoforge.event.tick.LevelTickEvent.Post t) {
+             LevelTickEvent.Post.BUS.addListener(new Consumer<LevelTickEvent.Post>() {
+                @Override
+                public void accept(LevelTickEvent.Post t) {
                         runnable.run();
-                }
+               }
+             });
+            //? } else if >= 1.19.0 {
+           /^
+           MinecraftForge.EVENT_BUS.addListener(new Consumer<LevelTickEvent>() {
+           
+               @Override
+               public void accept(LevelTickEvent t) {
+                   if (t.phase != LevelTickEvent.Phase.END)
+                       return;
+                   runnable.run();
+               }
            
            });
-         //? } else {
-        /^
-           NeoForge.EVENT_BUS.addListener(new Consumer<net.neoforged.neoforge.event.TickEvent.LevelTickEvent>() {
-              
-                     @Override
-                     public void accept(net.neoforged.neoforge.event.TickEvent.LevelTickEvent t) {
-                             runnable.run();
-                     }
-                     
+           ^///? } else {
+           /^
+             MinecraftForge.EVENT_BUS.addListener(new Consumer<WorldTickEvent>() {
+            
+                @Override
+                public void accept(WorldTickEvent t) {
+                if (t.phase != WorldTickEvent.Phase.END) return;
+                        runnable.run();
+                }
+                
              });
-         ^///? }
-        *///? }
+            ^///? }
+               *///? } else if neoforge {
+           /*
+            //? if >= 1.20.5 {
+           
+               NeoForge.EVENT_BUS.addListener(new Consumer<net.neoforged.neoforge.event.tick.LevelTickEvent.Post>() {
+              
+                    @Override
+                   public void accept(net.neoforged.neoforge.event.tick.LevelTickEvent.Post t) {
+                           runnable.run();
+                   }
+              
+              });
+            //? } else {
+           /^
+              NeoForge.EVENT_BUS.addListener(new Consumer<net.neoforged.neoforge.event.TickEvent.LevelTickEvent>() {
+                 
+                        @Override
+                        public void accept(net.neoforged.neoforge.event.TickEvent.LevelTickEvent t) {
+                                runnable.run();
+                        }
+                        
+                });
+            ^///? }
+           *///? }
     }
 
     public static void registerClientSetupListener(Runnable runnable) {
