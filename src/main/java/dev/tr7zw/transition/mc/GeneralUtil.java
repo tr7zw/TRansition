@@ -18,43 +18,21 @@ public class GeneralUtil {
     private static final Map<String, net.minecraft.client.KeyMapping.Category> categoryCache = new java.util.HashMap<>();
     //? }
 
-    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*/ /*ResourceLocation *//*?}*/ getResourceLocation(
-            String namespace, String path) {
-        //? if >= 1.21.11 {
-
+    public static Identifier getResourceLocation(String namespace, String path) {
+        //$ get_resource_location_namespace_path
         return Identifier.fromNamespaceAndPath(namespace, path);
-        //? } else if >= 1.21.0 {
-
-        /*return ResourceLocation.fromNamespaceAndPath(namespace, path);
-        *///? } else {
-        /*
-         return new ResourceLocation(namespace, path);
-        *///? }
     }
 
-    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*/ /*ResourceLocation *//*?}*/ getResourceLocation(
-            String key) {
-        //? if >= 1.21.11 {
-
+    public static Identifier getResourceLocation(String key) {
+        //$ get_resource_location_string
         return Identifier.parse(key);
-        //? } else if >= 1.21.0 {
-
-        /*return ResourceLocation.parse(key);
-        *///? } else {
-        /*
-         return new ResourceLocation(key);
-        *///? }
     }
 
     public static KeyMapping createKeyMapping(String keyName, int defaultKey, String category) {
-        //? if >= 1.21.9 {
-
-        return new KeyMapping(keyName, defaultKey, categoryCache.computeIfAbsent(category,
-                c -> new net.minecraft.client.KeyMapping.Category(getResourceLocation(c))));
-        //? } else {
-
-        /*return new KeyMapping(keyName, defaultKey, category);
-        *///? }
+        // spotless:off
+        //$ create_keymapping
+        return new KeyMapping(keyName, defaultKey, categoryCache.computeIfAbsent(category, c -> new net.minecraft.client.KeyMapping.Category(getResourceLocation(c))));
+        // spotless:on
     }
 
     public static LocalPlayer getPlayer() {
@@ -62,13 +40,8 @@ public class GeneralUtil {
     }
 
     public static Entity getCameraEntity() {
-        //? if >= 1.21.9 {
-
+        //$ get_camera_entity
         return Minecraft.getInstance().getCameraEntity();
-        //? } else {
-
-        /*return Minecraft.getInstance().cameraEntity;
-        *///? }
     }
 
     public static Level getWorld() {

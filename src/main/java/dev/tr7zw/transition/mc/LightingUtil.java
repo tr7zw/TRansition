@@ -13,16 +13,8 @@ import net.minecraft.client.Minecraft;
 public class LightingUtil {
 
     public static void prepareLightingEntity() {
-        //? if >= 1.21.6 {
-
+        //$ prepare_lighting_entity
         Minecraft.getInstance().gameRenderer.getLighting().setupFor(Entry.ENTITY_IN_UI);
-        //? } else if >= 1.17.0 {
-        /*
-        Lighting.setupForEntityInInventory();
-        *///? } else {
-        /*
-         Lighting.setupForFlatItems();
-        *///? }
     }
 
 }

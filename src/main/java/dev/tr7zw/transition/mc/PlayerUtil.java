@@ -60,7 +60,7 @@ public class PlayerUtil {
     }
     //? }
 
-    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*/ /*ResourceLocation *//*?}*/ getPlayerSkin(
+    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*/ /*Identifier *//*?}*/ getPlayerSkin(
             GameProfile gameprofile) {
         if (gameprofile == null) {
             return null;
@@ -84,13 +84,13 @@ public class PlayerUtil {
           if (texture == null) {
               return null;
           }
-          ResourceLocation resourceLocation = Minecraft.getInstance().getSkinManager().registerTexture(texture,
+          Identifier resourceLocation = Minecraft.getInstance().getSkinManager().registerTexture(texture,
                   MinecraftProfileTexture.Type.SKIN);
           return resourceLocation;
         *///? }
     }
 
-    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*/ /*ResourceLocation *//*?}*/ getPlayerCape(
+    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*/ /*Identifier *//*?}*/ getPlayerCape(
             AbstractClientPlayer player) {
         try {
             //? if >= 1.21.9 {
@@ -112,7 +112,7 @@ public class PlayerUtil {
 
     //? if >= 1.21.9 {
 
-    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*/ /*ResourceLocation *//*?}*/ getPlayerCape(
+    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*/ /*Identifier *//*?}*/ getPlayerCape(
             net.minecraft.world.entity.Avatar avatar) {
         if (avatar == null) {
             return null;

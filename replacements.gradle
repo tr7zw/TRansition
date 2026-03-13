@@ -20,8 +20,140 @@ stonecutter {
         : eval(current.version, ">= 1.21.2") ? "return renderState.chestItem.is(Items.ELYTRA);"
         : "return player.getItemBySlot(EquipmentSlot.CHEST).getItem().equals(Items.ELYTRA);"
 
-    swaps["has_chestplate_equipped"] = 
+    swaps["has_chestplate_equipped"] =
           eval(current.version, ">= 1.21.4") ? "return !hasElytraEquipped() && !renderState.chestEquipment.isEmpty();"
         : eval(current.version, ">= 1.21.2") ? "return !hasElytraEquipped() && !renderState.chestItem.isEmpty();"
         : "return !hasElytraEquipped() && !player.getItemBySlot(EquipmentSlot.CHEST).isEmpty();"
+
+    // GeneralUtil swaps
+    swaps["get_resource_location_namespace_path"] =
+          eval(current.version, ">= 1.21.11") ? "return Identifier.fromNamespaceAndPath(namespace, path);"
+        : eval(current.version, ">= 1.21.0") ? "return ResourceLocation.fromNamespaceAndPath(namespace, path);"
+        : "return new ResourceLocation(namespace, path);"
+
+    swaps["get_resource_location_string"] =
+          eval(current.version, ">= 1.21.11") ? "return Identifier.parse(key);"
+        : eval(current.version, ">= 1.21.0") ? "return ResourceLocation.parse(key);"
+        : "return new ResourceLocation(key);"
+
+    swaps["create_keymapping"] =
+          eval(current.version, ">= 1.21.9") ? "return new KeyMapping(keyName, defaultKey, categoryCache.computeIfAbsent(category, c -> new net.minecraft.client.KeyMapping.Category(getResourceLocation(c))));"
+        : "return new KeyMapping(keyName, defaultKey, category);"
+
+    swaps["get_camera_entity"] =
+          eval(current.version, ">= 1.21.9") ? "return Minecraft.getInstance().getCameraEntity();"
+        : "return Minecraft.getInstance().cameraEntity;"
+
+    // InventoryUtil swaps
+    swaps["get_inventory_from_player"] =
+          eval(current.version, ">= 1.17.0") ? "return player.getInventory();"
+        : "return player.inventory;"
+
+    swaps["get_selected_item"] =
+          eval(current.version, ">= 1.21.5") ? "return inventory.getSelectedItem();"
+        : "return inventory.getSelected();"
+
+    swaps["get_offhand_item"] =
+          eval(current.version, ">= 1.21.5") ? "return inventory.getItem(Inventory.SLOT_OFFHAND);"
+        : "return inventory.offhand.get(0);"
+
+    swaps["get_selected_id"] =
+          eval(current.version, ">= 1.21.5") ? "return inventory.getSelectedSlot();"
+        : "return inventory.selected;"
+
+    swaps["get_non_equipment_items"] =
+          eval(current.version, ">= 1.21.5") ? "return inventory.getNonEquipmentItems();"
+        : "return inventory.items;"
+
+    // EntityUtil swaps
+    swaps["get_entity_x_rot"] =
+          eval(current.version, ">= 1.17.0") ? "return ent.getXRot();"
+        : "return ent.xRot;"
+
+    swaps["get_entity_y_rot"] =
+          eval(current.version, ">= 1.17.0") ? "return ent.getYRot();"
+        : "return ent.yRot;"
+
+    swaps["set_entity_x_rot"] =
+          eval(current.version, ">= 1.17.0") ? "ent.setXRot(xRot);"
+        : "ent.xRot = xRot;"
+
+    swaps["set_entity_y_rot"] =
+          eval(current.version, ">= 1.17.0") ? "ent.setYRot(yRot);"
+        : "ent.yRot = yRot;"
+
+    // ItemUtil swaps
+    swaps["get_item_from_registry"] =
+          eval(current.version, ">= 1.21.2") ? "return BuiltInRegistries.ITEM.get(key).map(net.minecraft.core.Holder.Reference::value).orElse(Items.AIR);"
+        : eval(current.version, ">= 1.19.3") ? "return BuiltInRegistries.ITEM.get(key);"
+        : "return Registry.ITEM.get(key);"
+
+    swaps["get_items_set"] =
+          eval(current.version, ">= 1.19.3") ? "return BuiltInRegistries.ITEM.entrySet();"
+        : "return Registry.ITEM.entrySet();"
+
+    swaps["item_stack_is_same"] =
+          eval(current.version, "> 1.20.4") ? "return ItemStack.isSameItemSameComponents(a, b);"
+        : eval(current.version, ">= 1.17.0") ? "return ItemStack.isSameItemSameTags(a, b);"
+        : "return ItemStack.isSame(a, b);"
+
+    swaps["item_stack_has_custom_name"] =
+          eval(current.version, "> 1.20.4") ? "return stack.has(net.minecraft.core.component.DataComponents.CUSTOM_NAME);"
+        : "return stack.hasCustomHoverName();"
+
+    // LightingUtil swap
+    swaps["prepare_lighting_entity"] =
+          eval(current.version, ">= 1.21.6") ? "Minecraft.getInstance().gameRenderer.getLighting().setupFor(Entry.ENTITY_IN_UI);"
+        : eval(current.version, ">= 1.17.0") ? "Lighting.setupForEntityInInventory();"
+        : "Lighting.setupForFlatItems();"
+
+    // ClientUtil swap
+    swaps["send_chat_message"] =
+          eval(current.version, "> 1.21.1") ? "MC.getChatListener().handleSystemMessage(message, false);"
+        : eval(current.version, ">= 1.19.0") ? "if (MC.player != null) MC.player.sendSystemMessage(message);"
+        : "if (MC.player != null) MC.player.sendMessage(message, null);"
+
+    // VertexConsumerUtil swaps
+    swaps["add_vertex_basic"] =
+          eval(current.version, ">= 1.21.0") ? "cons.addVertex(matrix4f, x, y, z).setColor(255, 255, 255, 255).setUv(u, v).setUv2(u2, v2);"
+        : "cons.vertex(matrix4f, x, y, z).color(1f, 1f, 1f, 1f).uv(u, v).uv2(u2, v2).endVertex();"
+
+    swaps["add_vertex_uv"] =
+          eval(current.version, ">= 1.21.0") ? "cons.addVertex(matrix4f, x, y, z).setColor(255, 255, 255, 255).setUv(u, v);"
+        : "cons.vertex(matrix4f, x, y, z).color(1f, 1f, 1f, 1f).uv(u, v).endVertex();"
+
+    swaps["add_vertex_full"] =
+          eval(current.version, ">= 1.21.0") ? "cons.addVertex(matrix4f, x, y, z).setColor(255, 255, 255, alpha).setUv(u, v).setUv2(u2, v2).setOverlay(overlay).setNormal(nx, ny, nz);"
+        : "cons.vertex(matrix4f, x, y, z).color(1f, 1f, 1f, alpha / 255f).uv(u, v).overlayCoords(overlay).uv2(u2, v2).normal(nx, ny, nz).endVertex();"
+
+    // McId swaps
+    swaps["mc_id_create_namespace_path"] =
+          eval(current.version, ">= 1.21.11") ? "return new McId(Identifier.fromNamespaceAndPath(namespace, path));"
+        : eval(current.version, ">= 1.21.0") ? "return new McId(ResourceLocation.fromNamespaceAndPath(namespace, path));"
+        : "return new McId(new ResourceLocation(namespace, path));"
+
+    swaps["mc_id_create_string"] =
+          eval(current.version, ">= 1.21.11") ? "return new McId(Identifier.parse(id));"
+        : eval(current.version, ">= 1.21.0") ? "return new McId(ResourceLocation.parse(id));"
+        : "return new McId(new ResourceLocation(id));"
+
+    // PlayerUtil additional swaps
+    swaps["get_player_skin_from_player"] =
+          eval(current.version, ">= 1.21.9") ? "return player.getSkin().body().texturePath();"
+        : eval(current.version, ">= 1.20.2") ? "return player.getSkin().texture();"
+        : "return player.getSkinTextureLocation();"
+
+    swaps["get_player_skin_from_gameprofile"] =
+          eval(current.version, ">= 1.21.9") ? "return Minecraft.getInstance().getSkinManager().get(gameprofile).getNow(Optional.empty()).map(s -> s.body().texturePath()).orElse(null);"
+        : eval(current.version, ">= 1.20.2") ? "PlayerSkin playerSkin = Minecraft.getInstance().getSkinManager().getInsecureSkin(gameprofile);if (playerSkin.textureUrl() == null) {   return null;}return playerSkin.texture();"
+        : "Map<MinecraftProfileTexture.Type, MinecraftProfileTexture> map = Minecraft.getInstance().getSkinManager().getInsecureSkinInformation(gameprofile);MinecraftProfileTexture texture = map.get(MinecraftProfileTexture.Type.SKIN);if (texture == null) {    return null;}ResourceLocation resourceLocation = Minecraft.getInstance().getSkinManager().registerTexture(texture, MinecraftProfileTexture.Type.SKIN);return resourceLocation;"
+
+    swaps["get_player_cape"] =
+          eval(current.version, ">= 1.21.9") ? "return player.getSkin().cape().texturePath();"
+        : eval(current.version, ">= 1.20.2") ? "return player.getSkin().capeTexture();"
+        : "return player.getCloakTextureLocation();"
+
+    swaps["get_profile_from_resolvable"] =
+          eval(current.version, ">= 1.21.9") ? "return Minecraft.getInstance().playerSkinRenderCache().getOrDefault(profile).gameProfile();"
+        : "if(profile.isResolved()) {   return profile.gameProfile();} else {   return null;}"
 }
