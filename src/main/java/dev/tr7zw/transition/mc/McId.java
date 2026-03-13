@@ -7,8 +7,8 @@ public record McId(
         Identifier id
 
 //? } else {
-/*
-        ResourceLocation id
+
+/*ResourceLocation id
 *///? }
 ) {
 
@@ -17,8 +17,8 @@ public record McId(
 
         return new McId(Identifier.fromNamespaceAndPath(namespace, path));
         //? } else if >= 1.21.0 {
-        /*
-        return new McId(ResourceLocation.fromNamespaceAndPath(namespace, path));
+
+        /*return new McId(ResourceLocation.fromNamespaceAndPath(namespace, path));
         *///? } else {
         /*
          return new McId(new ResourceLocation(namespace, path));
@@ -30,8 +30,8 @@ public record McId(
 
         return new McId(Identifier.parse(id));
         //? } else if >= 1.21.0 {
-        /*
-        return new McId(ResourceLocation.parse(id));
+
+        /*return new McId(ResourceLocation.parse(id));
         *///? } else {
         /*
          return new McId(new ResourceLocation(id));

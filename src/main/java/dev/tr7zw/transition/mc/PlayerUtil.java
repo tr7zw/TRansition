@@ -10,8 +10,8 @@ import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.resources.*;
 
 //? if >= 1.20.2 && < 1.21.9 {
-/*
- import net.minecraft.client.resources.PlayerSkin;
+
+/*import net.minecraft.client.resources.PlayerSkin;
 *///? } else {
 
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
@@ -21,14 +21,13 @@ import java.util.Map;
 @UtilityClass
 public class PlayerUtil {
 
-    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ getPlayerSkin(
-            AbstractClientPlayer player) {
+    public static Identifier getPlayerSkin(AbstractClientPlayer player) {
         //? if >= 1.21.9 {
 
         return player.getSkin().body().texturePath();
         //? } else if >= 1.20.2 {
-        /*
-         return player.getSkin().texture();
+
+        /*return player.getSkin().texture();
         *///? } else {
         /*
          return player.getSkinTextureLocation();
@@ -37,8 +36,7 @@ public class PlayerUtil {
 
     //? if >= 1.21.9 {
 
-    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ getPlayerSkin(
-            net.minecraft.world.entity.Avatar avatar) {
+    public static Identifier getPlayerSkin(net.minecraft.world.entity.Avatar avatar) {
         return ((net.minecraft.client.entity.ClientAvatarEntity) avatar).getSkin().body().texturePath();
     }
     //? }
@@ -52,17 +50,17 @@ public class PlayerUtil {
 
         return Minecraft.getInstance().playerSkinRenderCache().getOrDefault(profile).gameProfile();
         //? } else {
-        /*
-         if(profile.isResolved()) {
-            return profile.gameProfile();
-         } else {
-            return null;
-         }
+
+        /*if(profile.isResolved()) {
+           return profile.gameProfile();
+        } else {
+           return null;
+        }
         *///? }
     }
     //? }
 
-    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ getPlayerSkin(
+    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*/ /*ResourceLocation *//*?}*/ getPlayerSkin(
             GameProfile gameprofile) {
         if (gameprofile == null) {
             return null;
@@ -72,12 +70,12 @@ public class PlayerUtil {
         return Minecraft.getInstance().getSkinManager().get(gameprofile).getNow(Optional.empty())
                 .map(s -> s.body().texturePath()).orElse(null);
         //? } else if >= 1.20.2 {
-        /*
-         PlayerSkin playerSkin = Minecraft.getInstance().getSkinManager().getInsecureSkin(gameprofile);
-         if (playerSkin.textureUrl() == null) {
-            return null;
-         }
-         return playerSkin.texture();
+
+        /*PlayerSkin playerSkin = Minecraft.getInstance().getSkinManager().getInsecureSkin(gameprofile);
+        if (playerSkin.textureUrl() == null) {
+           return null;
+        }
+        return playerSkin.texture();
         *///? } else {
         /*
          Map<MinecraftProfileTexture.Type, MinecraftProfileTexture> map = Minecraft.getInstance().getSkinManager()
@@ -92,15 +90,15 @@ public class PlayerUtil {
         *///? }
     }
 
-    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ getPlayerCape(
+    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*/ /*ResourceLocation *//*?}*/ getPlayerCape(
             AbstractClientPlayer player) {
         try {
             //? if >= 1.21.9 {
 
             return player.getSkin().cape().texturePath();
             //? } else if >= 1.20.2 {
-            /*
-             return player.getSkin().capeTexture();
+
+            /*return player.getSkin().capeTexture();
             *///? } else {
             /*
              return player.getCloakTextureLocation();
@@ -114,7 +112,7 @@ public class PlayerUtil {
 
     //? if >= 1.21.9 {
 
-    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ getPlayerCape(
+    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*/ /*ResourceLocation *//*?}*/ getPlayerCape(
             net.minecraft.world.entity.Avatar avatar) {
         if (avatar == null) {
             return null;

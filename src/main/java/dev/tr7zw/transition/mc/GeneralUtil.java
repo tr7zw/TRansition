@@ -18,28 +18,28 @@ public class GeneralUtil {
     private static final Map<String, net.minecraft.client.KeyMapping.Category> categoryCache = new java.util.HashMap<>();
     //? }
 
-    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ getResourceLocation(
+    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*/ /*ResourceLocation *//*?}*/ getResourceLocation(
             String namespace, String path) {
         //? if >= 1.21.11 {
 
         return Identifier.fromNamespaceAndPath(namespace, path);
         //? } else if >= 1.21.0 {
-        /*
-        return ResourceLocation.fromNamespaceAndPath(namespace, path);
+
+        /*return ResourceLocation.fromNamespaceAndPath(namespace, path);
         *///? } else {
         /*
          return new ResourceLocation(namespace, path);
         *///? }
     }
 
-    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ getResourceLocation(
+    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*/ /*ResourceLocation *//*?}*/ getResourceLocation(
             String key) {
         //? if >= 1.21.11 {
 
         return Identifier.parse(key);
         //? } else if >= 1.21.0 {
-        /*
-        return ResourceLocation.parse(key);
+
+        /*return ResourceLocation.parse(key);
         *///? } else {
         /*
          return new ResourceLocation(key);
@@ -52,8 +52,8 @@ public class GeneralUtil {
         return new KeyMapping(keyName, defaultKey, categoryCache.computeIfAbsent(category,
                 c -> new net.minecraft.client.KeyMapping.Category(getResourceLocation(c))));
         //? } else {
-        /*
-         return new KeyMapping(keyName, defaultKey, category);
+
+        /*return new KeyMapping(keyName, defaultKey, category);
         *///? }
     }
 
@@ -66,8 +66,8 @@ public class GeneralUtil {
 
         return Minecraft.getInstance().getCameraEntity();
         //? } else {
-        /*
-         return Minecraft.getInstance().cameraEntity;
+
+        /*return Minecraft.getInstance().cameraEntity;
         *///? }
     }
 

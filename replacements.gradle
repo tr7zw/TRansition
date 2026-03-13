@@ -1,0 +1,24 @@
+stonecutter {
+    swaps["get_cape_texture"] = 
+          eval(current.version, ">= 1.21.9") ? "return PlayerUtil.getPlayerCape(getAvatar());"
+        : eval(current.version, ">= 1.21.2") ? "return renderState.skin.capeTexture();"
+        : "return PlayerUtil.getPlayerCape(player);"
+
+    swaps["is_player_invisible"] = 
+          eval(current.version, ">= 1.21.2") ? "return renderState.isInvisible;"
+        : "return player.isInvisible();"
+
+    swaps["is_cape_visible"] = 
+          eval(current.version, ">= 1.21.2") ? "return renderState.showCape && !isPlayerInvisible();"
+        : "return player.isModelPartShown(PlayerModelPart.CAPE);"
+
+    swaps["has_elytra_equipped"] = 
+          eval(current.version, ">= 1.21.4") ? "return renderState.chestEquipment.is(Items.ELYTRA);"
+        : eval(current.version, ">= 1.21.2") ? "return renderState.chestItem.is(Items.ELYTRA);"
+        : "return player.getItemBySlot(EquipmentSlot.CHEST).getItem().equals(Items.ELYTRA);"
+
+    swaps["has_chestplate_equipped"] = 
+          eval(current.version, ">= 1.21.4") ? "return !hasElytraEquipped() && !renderState.chestEquipment.isEmpty();"
+        : eval(current.version, ">= 1.21.2") ? "return !hasElytraEquipped() && !renderState.chestItem.isEmpty();"
+        : "return !hasElytraEquipped() && !player.getItemBySlot(EquipmentSlot.CHEST).isEmpty();"
+}

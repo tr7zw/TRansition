@@ -34,7 +34,7 @@ import net.minecraft.world.item.component.ResolvableProfile;
 @UtilityClass
 public class ItemUtil {
 
-    public static Item getItem(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ key) {
+    public static Item getItem(/*? >= 1.21.11 {*/ Identifier /*?} else {*/ /*ResourceLocation *//*?}*/ key) {
         //? if >= 1.21.2 {
 
         return BuiltInRegistries.ITEM.get(key).map(net.minecraft.core.Holder.Reference::value).orElse(Items.AIR);
@@ -69,8 +69,8 @@ public class ItemUtil {
         }
         return null;
         //? } else if >= 1.20.5 {
-        /*
-        if (itemStack.getComponents().has(DataComponents.CUSTOM_MODEL_DATA)) {
+
+        /*if (itemStack.getComponents().has(DataComponents.CUSTOM_MODEL_DATA)) {
             return null;
         }
         if (itemStack.getComponents().has(DataComponents.PROFILE)) {

@@ -26,7 +26,7 @@ public class BlockEntityRenderStateMixin implements ExtensionHolder {
 
 }
 //? } else {
-/*
- @Mixin(targets = "net.minecraft.client.Minecraft") // dummy for older versions
- public class BlockEntityRenderStateMixin {}
+
+/*@Mixin(targets = "net.minecraft.client.Minecraft") // dummy for older versions
+public class BlockEntityRenderStateMixin {}
 *///? }
