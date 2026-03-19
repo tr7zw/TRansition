@@ -8,7 +8,8 @@
         "EntityRendererMixin",
         "BlockEntityRenderStateMixin",
         "MinecraftMixin",
-        "EntityAccessor"
+        "EntityAccessor",
+        "RecipeBookComponentMixin"
     ],
     "injectors": {
         "defaultRequire": 1

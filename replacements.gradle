@@ -109,6 +109,10 @@ stonecutter {
           eval(current.version, "> 1.21.1") ? "MC.getChatListener().handleSystemMessage(message, false);"
         : eval(current.version, ">= 1.19.0") ? "if (MC.player != null) MC.player.sendSystemMessage(message);"
         : "if (MC.player != null) MC.player.sendMessage(message, null);"
+    swaps["send_toast"] =
+          eval(current.version, ">= 1.21.2") ? "MC.getToastManager().addToast(new SystemToast(SystemToast.SystemToastId.PERIODIC_NOTIFICATION, titel, message));"
+        : eval(current.version, ">= 1.20.4") ? "MC.getToasts().addToast(new SystemToast(SystemToast.SystemToastId.PERIODIC_NOTIFICATION, titel, message));"
+        : "MC.getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT, titel, message));"
 
     // VertexConsumerUtil swaps
     swaps["add_vertex_basic"] =
