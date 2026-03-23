@@ -51,10 +51,10 @@ public class PlayerUtil {
         return Minecraft.getInstance().playerSkinRenderCache().getOrDefault(profile).gameProfile();
         //? } else {
 
-        /*if(profile.isResolved()) {
-           return profile.gameProfile();
+        /*if (profile.isResolved()) {
+            return profile.gameProfile();
         } else {
-           return null;
+            return null;
         }
         *///? }
     }
@@ -73,7 +73,7 @@ public class PlayerUtil {
 
         /*PlayerSkin playerSkin = Minecraft.getInstance().getSkinManager().getInsecureSkin(gameprofile);
         if (playerSkin.textureUrl() == null) {
-           return null;
+            return null;
         }
         return playerSkin.texture();
         *///? } else {

@@ -5,6 +5,7 @@ import net.minecraft.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.toasts.*;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.*;
 
 @UtilityClass
 public class ClientUtil {
@@ -25,6 +26,11 @@ public class ClientUtil {
     public static void sendToast(Component titel, Component message) {
         //$ send_toast
         MC.getToastManager().addToast(new SystemToast(SystemToast.SystemToastId.PERIODIC_NOTIFICATION, titel, message));
+    }
+
+    public static void playSound(SoundEvent sound, float volume, float pitch) {
+        if (MC.player != null)
+            MC.player.playSound(sound, volume, pitch);
     }
 
 }

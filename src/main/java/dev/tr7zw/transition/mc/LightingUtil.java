@@ -4,8 +4,8 @@ package dev.tr7zw.transition.mc;
 
 import com.mojang.blaze3d.platform.Lighting.Entry;
 //? } else {
-/*
-import com.mojang.blaze3d.platform.Lighting;
+
+/*import com.mojang.blaze3d.platform.Lighting;
 *///? }
 
 import net.minecraft.client.Minecraft;
