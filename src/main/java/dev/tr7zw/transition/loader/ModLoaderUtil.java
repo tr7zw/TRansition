@@ -13,7 +13,14 @@ import net.minecraft.client.gui.screens.Screen;
 //? if fabric {
 
 import net.minecraft.*;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.minecraft.util.*;
+//? if >= 26.0 {
+
+import net.fabricmc.fabric.api.client.keymapping.v1.*;
+//} else {
+/*
+import net.fabricmc.fabric.api.client.keybinding.v1.*;
+*///? }
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.*;
 //? } else if forge {
@@ -76,12 +83,18 @@ public class ModLoaderUtil {
     public static void registerKeybind(KeyMapping keyBinding) {
         //? if fabric {
 
-        KeyBindingHelper.registerKeyBinding(keyBinding);
-        //? } else if forge || neoforge {
+        //? if >= 26.0 {
+
+        KeyMappingHelper.registerKeyMapping(keyBinding);
+        //} else {
         /*
-        Minecraft.getInstance().options.keyMappings = ArrayUtils.add(Minecraft.getInstance().options.keyMappings,
-                keyBinding);
+        KeyBindingHelper.registerKeyBinding(keyBinding);
         *///? }
+           //? } else if forge || neoforge {
+           /*
+           Minecraft.getInstance().options.keyMappings = ArrayUtils.add(Minecraft.getInstance().options.keyMappings,
+                   keyBinding);
+           *///? }
 
     }
 

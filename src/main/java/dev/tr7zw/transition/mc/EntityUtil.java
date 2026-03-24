@@ -30,43 +30,23 @@ public class EntityUtil {
     //? }
 
     public static float getXRot(Entity ent) {
-        //? if >= 1.17.0 {
-
+        //$ get_entity_x_rot
         return ent.getXRot();
-        //? } else {
-        /*
-         return ent.xRot;
-        *///? }
     }
 
     public static float getYRot(Entity ent) {
-        //? if >= 1.17.0 {
-
+        //$ get_entity_y_rot
         return ent.getYRot();
-        //? } else {
-        /*
-         return ent.yRot;
-        *///? }
     }
 
     public static void setXRot(Entity ent, float xRot) {
-        //? if >= 1.17.0 {
-
+        //$ set_entity_x_rot
         ent.setXRot(xRot);
-        //? } else {
-        /*
-         ent.xRot = xRot;
-        *///? }
     }
 
     public static void setYRot(Entity ent, float yRot) {
-        //? if >= 1.17.0 {
-
+        //$ set_entity_y_rot
         ent.setYRot(yRot);
-        //? } else {
-        /*
-         ent.yRot = yRot;
-        *///? }
     }
 
 }

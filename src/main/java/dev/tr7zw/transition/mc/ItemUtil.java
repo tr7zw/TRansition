@@ -34,27 +34,14 @@ import net.minecraft.world.item.component.ResolvableProfile;
 @UtilityClass
 public class ItemUtil {
 
-    public static Item getItem(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ key) {
-        //? if >= 1.21.2 {
-
+    public static Item getItem(/*? >= 1.21.11 {*/ Identifier /*?} else {*/ /*Identifier *//*?}*/ key) {
+        //$ get_item_from_registry
         return BuiltInRegistries.ITEM.get(key).map(net.minecraft.core.Holder.Reference::value).orElse(Items.AIR);
-        //? } else if >= 1.19.3 {
-        /*
-         return BuiltInRegistries.ITEM.get(key);
-        *///? } else {
-        /*
-         return Registry.ITEM.get(key);
-        *///? }
     }
 
     public static Set<Entry<ResourceKey<Item>, Item>> getItems() {
-        //? if >= 1.19.3 {
-
+        //$ get_items_set
         return BuiltInRegistries.ITEM.entrySet();
-        //? } else {
-        /*
-         return Registry.ITEM.entrySet();
-        *///? }
     }
 
     public static GameProfile getGameProfile(ItemStack itemStack) {
@@ -69,8 +56,8 @@ public class ItemUtil {
         }
         return null;
         //? } else if >= 1.20.5 {
-        /*
-        if (itemStack.getComponents().has(DataComponents.CUSTOM_MODEL_DATA)) {
+
+        /*if (itemStack.getComponents().has(DataComponents.CUSTOM_MODEL_DATA)) {
             return null;
         }
         if (itemStack.getComponents().has(DataComponents.PROFILE)) {
@@ -106,26 +93,13 @@ public class ItemUtil {
     }
 
     public static boolean isSame(ItemStack a, ItemStack b) {
-        //? if < 1.17.0 {
-        /*
-         return ItemStack.isSame(a, b);
-        *///? } else if <= 1.20.4 {
-        /*
-         return ItemStack.isSameItemSameTags(a, b);
-        *///? } else {
-
+        //$ item_stack_is_same
         return ItemStack.isSameItemSameComponents(a, b);
-        //? }
     }
 
     public static boolean hasCustomName(ItemStack stack) {
-        //? if <= 1.20.4 {
-        /*
-         return stack.hasCustomHoverName();
-        *///? } else {
-
+        //$ item_stack_has_custom_name
         return stack.has(net.minecraft.core.component.DataComponents.CUSTOM_NAME);
-        //? }
     }
 
 }

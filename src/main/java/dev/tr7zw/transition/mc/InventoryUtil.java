@@ -9,53 +9,28 @@ import net.minecraft.world.item.ItemStack;
 public class InventoryUtil {
 
     public static Inventory getInventory(Player player) {
-        //? if >= 1.17.0 {
-
+        //$ get_inventory_from_player
         return player.getInventory();
-        //? } else {
-        /*
-         return player.inventory;
-        *///? }
     }
 
     public static ItemStack getSelected(Inventory inventory) {
-        //? if >= 1.21.5 {
-
+        //$ get_selected_item
         return inventory.getSelectedItem();
-        //? } else {
-        /*
-        return inventory.getSelected();
-        *///? }
     }
 
     public static ItemStack getOffhand(Inventory inventory) {
-        //? if >= 1.21.5 {
-
+        //$ get_offhand_item
         return inventory.getItem(Inventory.SLOT_OFFHAND);
-        //? } else {
-        /*
-        return inventory.offhand.get(0);
-        *///? }
     }
 
     public static int getSelectedId(Inventory inventory) {
-        //? if >= 1.21.5 {
-
+        //$ get_selected_id
         return inventory.getSelectedSlot();
-        //? } else {
-        /*
-        return inventory.selected;
-        *///? }
     }
 
     public static List<ItemStack> getNonEquipmentItems(Inventory inventory) {
-        //? if >= 1.21.5 {
-
+        //$ get_non_equipment_items
         return inventory.getNonEquipmentItems();
-        //? } else {
-        /*
-        return inventory.items;
-        *///? }
     }
 
 }

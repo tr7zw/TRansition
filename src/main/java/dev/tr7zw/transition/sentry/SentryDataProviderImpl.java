@@ -15,8 +15,8 @@ public class SentryDataProviderImpl implements SentryDataProvider {
 
     private final String minecraftVersion = DetectedVersion.tryDetectVersion().name();
     //? } else {
-    /*
-    private final String minecraftVersion = DetectedVersion.tryDetectVersion().getName();
+
+    /*private final String minecraftVersion = DetectedVersion.tryDetectVersion().getName();
     *///? }
 
     @Override
@@ -30,8 +30,8 @@ public class SentryDataProviderImpl implements SentryDataProvider {
 
         return "Fabric";
         //? } else if forge {
-        /*
-        return "Forge";
+
+        /*return "Forge";
         *///? } else if neoforge {
         /*
         return "NeoForge";
@@ -45,13 +45,13 @@ public class SentryDataProviderImpl implements SentryDataProvider {
         return net.fabricmc.loader.api.FabricLoader.getInstance().getAllMods().stream()
                 .map(m -> m.getMetadata().getId() + ":" + m.getMetadata().getVersion().getFriendlyString()).toList();
         //? } else if forge {
-        /*
-        //? if >= 1.21.4 {
+
+        /*//? if >= 1.21.4 {
         
         return net.minecraftforge.fml.ModList.get().getLoadedMods().stream().map(m -> m.getModId() + ":" + m.getModInfo().getVersion()).toList();
         //? } else {
-        /^
-        return net.minecraftforge.fml.ModList.get().getMods().stream().map(m -> m.getModId() + ":" + m.getVersion())
+        
+        /^return net.minecraftforge.fml.ModList.get().getMods().stream().map(m -> m.getModId() + ":" + m.getVersion())
                 .toList();
         ^///? }
         *///? } else if neoforge {
@@ -67,8 +67,8 @@ public class SentryDataProviderImpl implements SentryDataProvider {
         return net.fabricmc.loader.api.FabricLoader.getInstance().getModContainer("transition").get().getMetadata()
                 .getVersion().getFriendlyString();
         //? } else if forge {
-        /*
-        return net.minecraftforge.fml.ModList.get().getModContainerById("transition").get().getModInfo().getVersion()
+
+        /*return net.minecraftforge.fml.ModList.get().getModContainerById("transition").get().getModInfo().getVersion()
                 .toString();
         *///? } else if neoforge {
         /*

@@ -1,13 +1,10 @@
 package dev.tr7zw.transition.mc.entitywrapper;
 
 import dev.tr7zw.transition.mc.PlayerUtil;
-//? if >= 1.21.9 {
+//? if >= 1.21.2 {
 
-import net.minecraft.client.renderer.entity.state.AvatarRenderState;
-//? } else if >= 1.21.2 {
-/*
-import net.minecraft.client.renderer.entity.state.PlayerRenderState;
-*///? } else {
+import net.minecraft.client.renderer.entity.state.*;
+//? } else if < 1.21.2 {
 /*
  import net.minecraft.client.player.AbstractClientPlayer;
  import net.minecraft.world.entity.EquipmentSlot;
@@ -19,7 +16,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.entity.player.Player;
 
 public class PlayerWrapper extends LivingEntityWrapper {
-    //? if >= 1.21.9 {
+
+    //? if >= 1.21.2 {
 
     private final AvatarRenderState renderState;
 
@@ -32,28 +30,18 @@ public class PlayerWrapper extends LivingEntityWrapper {
         super(renderState);
         this.renderState = renderState;
     }
+    //? }
+
+    //? if >= 1.21.9 {
 
     public net.minecraft.world.entity.Avatar getAvatar() {
-        if ( super.getEntity() instanceof net.minecraft.world.entity.Avatar avatar) {
+        if (super.getEntity() instanceof net.minecraft.world.entity.Avatar avatar) {
             return avatar;
         }
         return null;
     }
 
-    //? } else if >= 1.21.2 {
-    /*
-    private final PlayerRenderState renderState;
-    
-    @Override
-    public PlayerRenderState getRenderState() {
-        return renderState;
-    }
-    
-    public PlayerWrapper(PlayerRenderState renderState) {
-        super(renderState);
-        this.renderState = renderState;
-    }
-    *///? } else {
+    //? } else if < 1.21.2 {
     /*
      private final AbstractClientPlayer player;
     
@@ -69,62 +57,28 @@ public class PlayerWrapper extends LivingEntityWrapper {
         return (Player) super.getEntity();
     }
 
-    public /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ getCapeTexture() {
-        //? if >= 1.21.9 {
-
+    public Identifier getCapeTexture() {
+        //$ get_cape_texture
         return PlayerUtil.getPlayerCape(getAvatar());
-        //? } else if >= 1.21.2 {
-        /*
-        return renderState.skin.capeTexture();
-        *///? } else {
-        /*
-         return PlayerUtil.getPlayerCape(player);
-        *///? }
     }
 
     public boolean isPlayerInvisible() {
-        //? if >= 1.21.2 {
-
+        //$ is_player_invisible
         return renderState.isInvisible;
-        //? } else {
-        /*
-         return player.isInvisible();
-        *///? }
     }
 
     public boolean isCapeVisible() {
-        //? if >= 1.21.2 {
-
+        //$ is_cape_visible
         return renderState.showCape && !isPlayerInvisible();
-        //? } else {
-        /*
-         return player.isModelPartShown(PlayerModelPart.CAPE);
-        *///? }
     }
 
     public boolean hasElytraEquipped() {
-        //? if >= 1.21.4 {
-
+        //$ has_elytra_equipped
         return renderState.chestEquipment.is(Items.ELYTRA);
-        //? } else if >= 1.21.2 {
-        /*
-        return renderState.chestItem.is(Items.ELYTRA);
-        *///? } else {
-        /*
-         return player.getItemBySlot(EquipmentSlot.CHEST).getItem().equals(Items.ELYTRA);
-        *///? }
     }
 
     public boolean hasChestplateEquipped() {
-        //? if >= 1.21.4 {
-
+        //$ has_chestplate_equipped
         return !hasElytraEquipped() && !renderState.chestEquipment.isEmpty();
-        //? } else if >= 1.21.2 {
-        /*
-        return !hasElytraEquipped() && !renderState.chestItem.isEmpty();
-        *///? } else {
-        /*
-         return !hasElytraEquipped() && !player.getItemBySlot(EquipmentSlot.CHEST).isEmpty();
-        *///? }
     }
 }
