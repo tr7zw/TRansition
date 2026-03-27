@@ -135,8 +135,4 @@ public class ClientTRansitionMod
         });
     }
 
-    public void onInitialize() {
-
-    }
-
 }

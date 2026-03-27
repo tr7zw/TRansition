@@ -17,7 +17,6 @@ public class TRansitionBootstrap {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
             new ClientTRansitionMod().onInitializeClient();
         });
-        new ClientTRansitionMod().onInitialize();
     }
 
     public TRansitionBootstrap() {
@@ -47,7 +46,6 @@ public class TRansitionBootstrap {
  //? }
          new ClientTRansitionMod().onInitializeClient();
         }
-        new ClientTRansitionMod().onInitialize();
     }
     
  }
