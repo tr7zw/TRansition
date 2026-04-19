@@ -22,9 +22,11 @@ public interface CustomPacketPayloadSupport extends CustomPacketPayload {
 
     void write(FriendlyByteBuf paramFriendlyByteBuf);
 
+    CustomPacketPayloadSupport read(FriendlyByteBuf paramFriendlyByteBuf);
+
     //? if >= 1.20.5 {
 
-    public default net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type<? extends CustomPacketPayload> type() {
+    default net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type<? extends CustomPacketPayload> type() {
         return new net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type<CustomPacketPayload>(id());
     }
 

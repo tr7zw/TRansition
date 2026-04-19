@@ -70,19 +70,27 @@ public class ServerNetworkUtil {
     }
 
     public interface RegisterHander {
+
+        default <T extends CustomPacketPayloadSupport> void registerClientCustomPacket(T dummy) {
+            registerClientCustomPacket((Class<T>) dummy.getClass(), dummy.id(), b -> (T) dummy.read(b));
+        }
+
         <T extends CustomPacketPayloadSupport> void registerClientCustomPacket(Class<T> type, Identifier id,
-                Function<FriendlyByteBuf, T> streamMemberEncoder, BiConsumer<T, FriendlyByteBuf> streamDecoder);
+                Function<FriendlyByteBuf, T> streamMemberEncoder);
+
+        default <T extends CustomPacketPayloadSupport> void registerServerCustomPacket(T dummy, BiConsumer<T, ServerPlayer> action) {
+            registerServerCustomPacket((Class<T>) dummy.getClass(), dummy.id(), b -> (T) dummy.read(b), action);
+        }
 
         <T extends CustomPacketPayloadSupport> void registerServerCustomPacket(Class<T> type, Identifier id,
-                Function<FriendlyByteBuf, T> streamMemberEncoder, BiConsumer<T, FriendlyByteBuf> streamDecoder,
-                BiConsumer<T, ServerPlayer> action);
+                Function<FriendlyByteBuf, T> streamMemberEncoder, BiConsumer<T, ServerPlayer> action);
     }
 
     private static class RegisterImpl implements RegisterHander {
 
         @Override
         public <T extends CustomPacketPayloadSupport> void registerClientCustomPacket(Class<T> type, Identifier id,
-                Function<FriendlyByteBuf, T> streamMemberEncoder, BiConsumer<T, FriendlyByteBuf> streamDecoder) {
+                Function<FriendlyByteBuf, T> streamMemberEncoder) {
             //? if > 1.20.5 {
 
             if (PayloadTypeRegistryImpl.CLIENTBOUND_PLAY.get(id) == null) {
@@ -95,7 +103,7 @@ public class ServerNetworkUtil {
 
                     @Override
                     public void encode(FriendlyByteBuf buffer, T object) {
-                        streamDecoder.accept(object, buffer);
+                        object.write(buffer);
                     }
 
                 });
@@ -105,8 +113,7 @@ public class ServerNetworkUtil {
 
         @Override
         public <T extends CustomPacketPayloadSupport> void registerServerCustomPacket(Class<T> type, Identifier id,
-                Function<FriendlyByteBuf, T> streamMemberEncoder, BiConsumer<T, FriendlyByteBuf> streamDecoder,
-                BiConsumer<T, ServerPlayer> action) {
+                Function<FriendlyByteBuf, T> streamMemberEncoder, BiConsumer<T, ServerPlayer> action) {
             BiConsumer<T, ServerPlayer> catchingAction = (payload, player) -> {
                 try {
                     action.accept(payload, player);
@@ -127,7 +134,7 @@ public class ServerNetworkUtil {
 
                     @Override
                     public void encode(FriendlyByteBuf buffer, T object) {
-                        streamDecoder.accept(object, buffer);
+                        object.write(buffer);
                     }
 
                 });
