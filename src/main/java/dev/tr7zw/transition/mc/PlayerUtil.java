@@ -29,8 +29,8 @@ public class PlayerUtil {
 
         /*return player.getSkin().texture();
         *///? } else {
-        /*
-         return player.getSkinTextureLocation();
+
+        /*return player.getSkinTextureLocation();
         *///? }
     }
 
@@ -77,16 +77,16 @@ public class PlayerUtil {
         }
         return playerSkin.texture();
         *///? } else {
-        /*
-         Map<MinecraftProfileTexture.Type, MinecraftProfileTexture> map = Minecraft.getInstance().getSkinManager()
-                 .getInsecureSkinInformation(gameprofile);
-         MinecraftProfileTexture texture = map.get(MinecraftProfileTexture.Type.SKIN);
-          if (texture == null) {
-              return null;
-          }
-          Identifier resourceLocation = Minecraft.getInstance().getSkinManager().registerTexture(texture,
-                  MinecraftProfileTexture.Type.SKIN);
-          return resourceLocation;
+
+        /*Map<MinecraftProfileTexture.Type, MinecraftProfileTexture> map = Minecraft.getInstance().getSkinManager()
+                .getInsecureSkinInformation(gameprofile);
+        MinecraftProfileTexture texture = map.get(MinecraftProfileTexture.Type.SKIN);
+         if (texture == null) {
+             return null;
+         }
+         Identifier resourceLocation = Minecraft.getInstance().getSkinManager().registerTexture(texture,
+                 MinecraftProfileTexture.Type.SKIN);
+         return resourceLocation;
         *///? }
     }
 
@@ -100,8 +100,8 @@ public class PlayerUtil {
 
             /*return player.getSkin().capeTexture();
             *///? } else {
-            /*
-             return player.getCloakTextureLocation();
+
+            /*return player.getCloakTextureLocation();
             *///? }
         } catch (NullPointerException ignored) {
             // Broken Oculus + cape modifying mods cause NPE by rendering before the player is setup and are not nullchecking

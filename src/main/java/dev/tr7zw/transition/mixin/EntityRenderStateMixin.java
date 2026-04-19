@@ -34,7 +34,7 @@ public class EntityRenderStateMixin implements EntityRenderStateExtender, Extens
 
 }
 //? } else {
-/*
- @Mixin(targets = "net.minecraft.client.Minecraft") // dummy for older versions
- public class EntityRenderStateMixin {}
+
+/*@Mixin(targets = "net.minecraft.client.Minecraft") // dummy for older versions
+public class EntityRenderStateMixin {}
 *///? }

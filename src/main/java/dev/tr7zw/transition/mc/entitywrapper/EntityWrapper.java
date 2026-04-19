@@ -27,11 +27,10 @@ public class EntityWrapper {
         }
     }
     //? } else {
-    /*
-    
-     public EntityWrapper(Entity entity) {
-            this.entity = entity;
-     }
+
+    /*public EntityWrapper(Entity entity) {
+           this.entity = entity;
+    }
     *///? }
 
     public Entity getEntity() {

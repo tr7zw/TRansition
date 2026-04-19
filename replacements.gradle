@@ -1,4 +1,16 @@
 stonecutter {
+
+    replacements.string(current.parsed >= "1.21.11") {
+        replace("clientboundCustomPayloadPacket.getIdentifier()", "clientboundCustomPayloadPacket.getIdentifier()") // Do not rename this
+        replace("serverboundCustomPayloadPacket.getIdentifier()", "serverboundCustomPayloadPacket.getIdentifier()") // Do not rename this
+    }
+    replacements.string(current.parsed >= "26.1") {
+        replace("PayloadTypeRegistryImpl.PLAY_C2S", "PayloadTypeRegistryImpl.SERVERBOUND_PLAY")
+        replace("PayloadTypeRegistryImpl.PLAY_S2C", "PayloadTypeRegistryImpl.CLIENTBOUND_PLAY")
+        replace("PayloadTypeRegistry.playS2C()", "PayloadTypeRegistry.clientboundPlay()")
+        replace("PayloadTypeRegistry.playC2S()", "PayloadTypeRegistry.serverboundPlay()")
+    }
+
     swaps["get_cape_texture"] = 
           eval(current.version, ">= 1.21.9") ? "return PlayerUtil.getPlayerCape(getAvatar());"
         : eval(current.version, ">= 1.21.2") ? "return renderState.skin.capeTexture();"

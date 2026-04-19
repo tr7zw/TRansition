@@ -23,7 +23,7 @@ public class EntityRendererMixin {
 
 }
 //? } else {
-/*
- @Mixin(targets = "net.minecraft.client.Minecraft") // dummy for older versions
- public class EntityRendererMixin {}
+
+/*@Mixin(targets = "net.minecraft.client.Minecraft") // dummy for older versions
+public class EntityRendererMixin {}
 *///? }

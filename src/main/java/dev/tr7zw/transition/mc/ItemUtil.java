@@ -20,12 +20,12 @@ import net.minecraft.core.registries.BuiltInRegistries;
  import net.minecraft.core.Registry;
 *///? }
    //? if <= 1.20.4 {
-   /*
-    import net.minecraft.Util;
-    import org.apache.commons.lang3.StringUtils;
-    import net.minecraft.nbt.CompoundTag;
-    import net.minecraft.nbt.NbtUtils;
-   *///? } else {
+
+/*import net.minecraft.Util;
+import org.apache.commons.lang3.StringUtils;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
+*///? } else {
 
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.ResolvableProfile;
@@ -75,20 +75,20 @@ public class ItemUtil {
         }
         return null;
         *///? } else {
-        /*
-         if (itemStack.hasTag()) {
-             CompoundTag compoundTag = itemStack.getTag();
-             if (compoundTag.contains("CustomModelData")) {
-                 return null; // do not try to 3d-fy custom head models
-             }
-             if (compoundTag.contains("SkullOwner", 10)) {
-                 return NbtUtils.readGameProfile(compoundTag.getCompound("SkullOwner"));
-             } else if (compoundTag.contains("SkullOwner", 8)
-                     && !StringUtils.isBlank(compoundTag.getString("SkullOwner"))) {
-                 return new GameProfile(Util.NIL_UUID, compoundTag.getString("SkullOwner"));
-             }
-         }
-         return null;
+
+        /*if (itemStack.hasTag()) {
+            CompoundTag compoundTag = itemStack.getTag();
+            if (compoundTag.contains("CustomModelData")) {
+                return null; // do not try to 3d-fy custom head models
+            }
+            if (compoundTag.contains("SkullOwner", 10)) {
+                return NbtUtils.readGameProfile(compoundTag.getCompound("SkullOwner"));
+            } else if (compoundTag.contains("SkullOwner", 8)
+                    && !StringUtils.isBlank(compoundTag.getString("SkullOwner"))) {
+                return new GameProfile(Util.NIL_UUID, compoundTag.getString("SkullOwner"));
+            }
+        }
+        return null;
         *///? }
     }
 

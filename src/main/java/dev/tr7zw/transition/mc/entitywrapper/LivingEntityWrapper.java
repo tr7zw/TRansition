@@ -21,14 +21,14 @@ public class LivingEntityWrapper extends EntityWrapper {
         this.renderState = renderState;
     }
     //? } else {
-    /*
-     private final LivingEntity entity;
+
+    /*private final LivingEntity entity;
     
     
-     public LivingEntityWrapper(LivingEntity entity) {
-            super(entity);
-            this.entity = entity;
-     }
+    public LivingEntityWrapper(LivingEntity entity) {
+           super(entity);
+           this.entity = entity;
+    }
     *///? }
 
     @Override

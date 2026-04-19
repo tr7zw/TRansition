@@ -5,11 +5,11 @@ import dev.tr7zw.transition.mc.PlayerUtil;
 
 import net.minecraft.client.renderer.entity.state.*;
 //? } else if < 1.21.2 {
-/*
- import net.minecraft.client.player.AbstractClientPlayer;
- import net.minecraft.world.entity.EquipmentSlot;
- import net.minecraft.world.entity.player.PlayerModelPart;
- import dev.tr7zw.transition.mc.PlayerUtil;
+
+/*import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.PlayerModelPart;
+import dev.tr7zw.transition.mc.PlayerUtil;
 *///? }
 import net.minecraft.resources.*;
 import net.minecraft.world.item.Items;
@@ -42,14 +42,14 @@ public class PlayerWrapper extends LivingEntityWrapper {
     }
 
     //? } else if < 1.21.2 {
-    /*
-     private final AbstractClientPlayer player;
+
+    /*private final AbstractClientPlayer player;
     
     
-     public PlayerWrapper(AbstractClientPlayer player) {
-            super(player);
-            this.player = player;
-     }
+    public PlayerWrapper(AbstractClientPlayer player) {
+           super(player);
+           this.player = player;
+    }
     *///? }
 
     @Override

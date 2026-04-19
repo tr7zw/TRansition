@@ -80,8 +80,8 @@ public class ModLoaderUtil {
 
         net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper.registerKeyMapping(keyBinding);
         //?} else {
-        /*
-        net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper.registerKeyBinding(keyBinding);
+
+        /*net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper.registerKeyBinding(keyBinding);
         *///? }
            //? } else if forge || neoforge {
            /*
