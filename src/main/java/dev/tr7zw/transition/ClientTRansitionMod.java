@@ -52,87 +52,97 @@ public class ClientTRansitionMod
                     ComponentProvider.literal(new String(Base64.getDecoder().decode("U29tZSB2b2ljZS4uLg=="))),
                     ComponentProvider.literal(new String(Base64.getDecoder().decode("UG9sbyE="))));
         });
-        CodeManager.getInstance().registerCode(new String(Base64.getDecoder().decode("Z29kbW9kZQ==")), () -> {
-            long start = System.currentTimeMillis();
-            new Thread(() -> {
-                float health = GeneralUtil.getPlayer().getHealth();
-                Minecraft.getInstance().submit(() -> {
-                    Minecraft.getInstance().setScreen(null);
-                    ClientUtil.sendActionBarMessage(ComponentProvider
-                            .literal(new String(Base64.getDecoder().decode("R29kbW9kZSBlbmFibGVkIQ=="))));
-                });
-                while (System.currentTimeMillis() - start < 5000) {
+        // check if its April first +- 2 days
+        boolean isAprilFools = false;
+        Calendar calendar = Calendar.getInstance();
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        if (month == Calendar.APRIL && day >= 1 && day <= 3) {
+            isAprilFools = true;
+        }
+        if (isAprilFools) {
+            CodeManager.getInstance().registerCode(new String(Base64.getDecoder().decode("Z29kbW9kZQ==")), () -> {
+                long start = System.currentTimeMillis();
+                new Thread(() -> {
+                    float health = GeneralUtil.getPlayer().getHealth();
                     Minecraft.getInstance().submit(() -> {
-                        if (GeneralUtil.getPlayer().isDeadOrDying()) {
-                            return;
+                        Minecraft.getInstance().setScreen(null);
+                        ClientUtil.sendActionBarMessage(ComponentProvider
+                                .literal(new String(Base64.getDecoder().decode("R29kbW9kZSBlbmFibGVkIQ=="))));
+                    });
+                    while (System.currentTimeMillis() - start < 5000) {
+                        Minecraft.getInstance().submit(() -> {
+                            if (GeneralUtil.getPlayer().isDeadOrDying()) {
+                                return;
+                            }
+                            ClientUtil.playSound(SoundEvents.PLAYER_DEATH, 1, 1);
+                            GeneralUtil.getPlayer().hurtTo(health * (1f - ((System.currentTimeMillis() - start) / 5000f)));
+                        });
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
                         }
-                        ClientUtil.playSound(SoundEvents.PLAYER_DEATH, 1, 1);
-                        GeneralUtil.getPlayer().hurtTo(health * (1f - ((System.currentTimeMillis() - start) / 5000f)));
+                    }
+                    if (GeneralUtil.getPlayer().isDeadOrDying()) {
+                        return;
+                    }
+                    var screen = new DeathScreen(
+                            ComponentProvider.literal(
+                                    GeneralUtil.getPlayer().getName().getString() + new String(Base64.getDecoder().decode(
+                                            "IHdlbnQgc28gbWFkIHdpdGggcG93ZXIgdGhhdCB0aGV5IGRpZWQhIEFwcmlsIEZvb2xzIQ=="))),
+                            false
+                            //? if >= 1.21.11 {
+
+                            , Minecraft.getInstance().player
+                            //? }
+                    );
+
+                    List<ItemStack> items = new ArrayList<>();
+                    Minecraft.getInstance().submit(() -> {
+                        GeneralUtil.getPlayer().hurtTo(0.1f);
+                        //? if >= 1.18 {
+
+                        var inv = GeneralUtil.getPlayer().getInventory();
+                        //? } else {
+                    /*
+                    var inv = GeneralUtil.getPlayer().inventory;
+                    *///? }
+                        for (int i = 0; i < inv.getContainerSize(); i++) {
+                            items.add(inv.getItem(i));
+                            inv.setItem(i, ItemStack.EMPTY);
+                        }
+                        if (Minecraft.getInstance().screen == null) {
+                            Minecraft.getInstance().setScreen(screen);
+                        }
                     });
                     try {
-                        Thread.sleep(500);
+                        Thread.sleep(4000);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
-                }
-                if (GeneralUtil.getPlayer().isDeadOrDying()) {
-                    return;
-                }
-                var screen = new DeathScreen(
-                        ComponentProvider.literal(
-                                GeneralUtil.getPlayer().getName().getString() + new String(Base64.getDecoder().decode(
-                                        "IHdlbnQgc28gbWFkIHdpdGggcG93ZXIgdGhhdCB0aGV5IGRpZWQhIEFwcmlsIEZvb2xzIQ=="))),
-                        false
-                //? if >= 1.21.11 {
+                    if (GeneralUtil.getPlayer().isDeadOrDying()) {
+                        return;
+                    }
+                    Minecraft.getInstance().submit(() -> {
+                        if (Minecraft.getInstance().screen == screen) {
+                            Minecraft.getInstance().setScreen(null);
+                        }
+                        GeneralUtil.getPlayer().hurtTo(health);
+                        //? if >= 1.18 {
 
-                        , Minecraft.getInstance().player
-                //? }
-                );
-
-                List<ItemStack> items = new ArrayList<>();
-                Minecraft.getInstance().submit(() -> {
-                    GeneralUtil.getPlayer().hurtTo(0.1f);
-                    //? if >= 1.18 {
-
-                    var inv = GeneralUtil.getPlayer().getInventory();
-                    //? } else {
+                        var inv = GeneralUtil.getPlayer().getInventory();
+                        //? } else {
                     /*
                     var inv = GeneralUtil.getPlayer().inventory;
                     *///? }
-                    for (int i = 0; i < inv.getContainerSize(); i++) {
-                        items.add(inv.getItem(i));
-                        inv.setItem(i, ItemStack.EMPTY);
-                    }
-                    if (Minecraft.getInstance().screen == null) {
-                        Minecraft.getInstance().setScreen(screen);
-                    }
-                });
-                try {
-                    Thread.sleep(4000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                if (GeneralUtil.getPlayer().isDeadOrDying()) {
-                    return;
-                }
-                Minecraft.getInstance().submit(() -> {
-                    if (Minecraft.getInstance().screen == screen) {
-                        Minecraft.getInstance().setScreen(null);
-                    }
-                    GeneralUtil.getPlayer().hurtTo(health);
-                    //? if >= 1.18 {
-
-                    var inv = GeneralUtil.getPlayer().getInventory();
-                    //? } else {
-                    /*
-                    var inv = GeneralUtil.getPlayer().inventory;
-                    *///? }
-                    for (int i = 0; i < inv.getContainerSize(); i++) {
-                        inv.setItem(i, items.get(i));
-                    }
-                });
-            }).start();
-        });
+                        for (int i = 0; i < inv.getContainerSize(); i++) {
+                            inv.setItem(i, items.get(i));
+                        }
+                    });
+                }).start();
+            });
+        }
     }
 
 }
