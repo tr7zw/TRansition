@@ -5,6 +5,7 @@ import java.util.Map;
 import lombok.experimental.UtilityClass;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.*;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.*;
 import net.minecraft.world.entity.Entity;
@@ -46,6 +47,16 @@ public class GeneralUtil {
 
     public static Level getWorld() {
         return Minecraft.getInstance().level;
+    }
+
+    public static Screen getScreen() {
+        //$ get_screen
+        return Minecraft.getInstance().gui.screen();
+    }
+
+    public static void setScreen(Screen screen) {
+        //$ set_screen
+        Minecraft.getInstance().gui.setScreen(screen);
     }
 
 }

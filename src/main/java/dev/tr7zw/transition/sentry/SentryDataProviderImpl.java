@@ -89,7 +89,7 @@ public class SentryDataProviderImpl implements SentryDataProvider {
 
     @Override
     public String getScreen() {
-        var screen = Minecraft.getInstance().screen;
+        var screen = GeneralUtil.getScreen();
         return screen == null ? "Null" : screen.toString();
     }
 }

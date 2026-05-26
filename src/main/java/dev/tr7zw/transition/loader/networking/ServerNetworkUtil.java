@@ -78,7 +78,8 @@ public class ServerNetworkUtil {
         <T extends CustomPacketPayloadSupport> void registerClientCustomPacket(Class<T> type, Identifier id,
                 Function<FriendlyByteBuf, T> streamMemberEncoder);
 
-        default <T extends CustomPacketPayloadSupport> void registerServerCustomPacket(T dummy, BiConsumer<T, ServerPlayer> action) {
+        default <T extends CustomPacketPayloadSupport> void registerServerCustomPacket(T dummy,
+                BiConsumer<T, ServerPlayer> action) {
             registerServerCustomPacket((Class<T>) dummy.getClass(), dummy.id(), b -> (T) dummy.read(b), action);
         }
 

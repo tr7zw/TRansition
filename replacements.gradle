@@ -53,6 +53,14 @@ stonecutter {
           eval(current.version, ">= 1.21.9") ? "return Minecraft.getInstance().getCameraEntity();"
         : "return Minecraft.getInstance().cameraEntity;"
 
+    swaps["get_screen"] =
+          eval(current.version, ">= 26.2") ? "return Minecraft.getInstance().gui.screen();"
+        : "return Minecraft.getInstance().screen;"
+
+    swaps["set_screen"] =
+          eval(current.version, ">= 26.2") ? "Minecraft.getInstance().gui.setScreen(screen);"
+        : "Minecraft.getInstance().setScreen(screen);"
+
     // InventoryUtil swaps
     swaps["get_inventory_from_player"] =
           eval(current.version, ">= 1.17.0") ? "return player.getInventory();"
@@ -112,19 +120,26 @@ stonecutter {
 
     // LightingUtil swap
     swaps["prepare_lighting_entity"] =
-          eval(current.version, ">= 1.21.6") ? "Minecraft.getInstance().gameRenderer.getLighting().setupFor(Entry.ENTITY_IN_UI);"
+        eval(current.version, ">= 26.2") ? "Minecraft.getInstance().gameRenderer.lighting().setupFor(Entry.ENTITY_IN_UI);"
+        : eval(current.version, ">= 1.21.6") ? "Minecraft.getInstance().gameRenderer.getLighting().setupFor(Entry.ENTITY_IN_UI);"
         : eval(current.version, ">= 1.17.0") ? "Lighting.setupForEntityInInventory();"
         : "Lighting.setupForFlatItems();"
 
     // ClientUtil swap
     swaps["send_chat_message"] =
-          eval(current.version, "> 1.21.1") ? "MC.getChatListener().handleSystemMessage(message, false);"
+        eval(current.version, ">= 26.2") ? "MC.gui.hud.getChat().addClientSystemMessage(message);"
+        : eval(current.version, "> 1.21.1") ? "MC.getChatListener().handleSystemMessage(message, false);"
         : eval(current.version, ">= 1.19.0") ? "if (MC.player != null) MC.player.sendSystemMessage(message);"
         : "if (MC.player != null) MC.player.sendMessage(message, null);"
     swaps["send_toast"] =
-          eval(current.version, ">= 1.21.2") ? "MC.getToastManager().addToast(new SystemToast(SystemToast.SystemToastId.PERIODIC_NOTIFICATION, titel, message));"
+        eval(current.version, "> 26.2") ? "MC.gui.toastManager().addToast(new SystemToast(SystemToast.SystemToastId.PERIODIC_NOTIFICATION, titel, message));"
+        : eval(current.version, ">= 1.21.2") ? "MC.getToastManager().addToast(new SystemToast(SystemToast.SystemToastId.PERIODIC_NOTIFICATION, titel, message));"
         : eval(current.version, ">= 1.20.4") ? "MC.getToasts().addToast(new SystemToast(SystemToast.SystemToastId.PERIODIC_NOTIFICATION, titel, message));"
         : "MC.getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT, titel, message));"
+
+    swaps["send_action_bar_message"] =
+        eval(current.version, "> 26.2") ? "MC.gui.hud.setOverlayMessage(message, false);"
+        : "MC.gui.setOverlayMessage(message, false);"
 
     // VertexConsumerUtil swaps
     swaps["add_vertex_basic"] =

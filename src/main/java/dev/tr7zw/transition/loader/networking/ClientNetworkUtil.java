@@ -66,14 +66,14 @@ public class ClientNetworkUtil {
     public interface RegisterHander {
 
         default <T extends CustomPacketPayloadSupport> void registerServerCustomPacket(T dummy) {
-            registerServerCustomPacket((Class<T>)dummy.getClass(), dummy.id(), b -> (T)dummy.read(b));
+            registerServerCustomPacket((Class<T>) dummy.getClass(), dummy.id(), b -> (T) dummy.read(b));
         }
 
         <T extends CustomPacketPayloadSupport> void registerServerCustomPacket(Class<T> type, Identifier id,
                 Function<FriendlyByteBuf, T> streamMemberEncoder);
 
         default <T extends CustomPacketPayloadSupport> void registerClientCustomPacket(T dummy, Consumer<T> action) {
-            registerClientCustomPacket((Class<T>)dummy.getClass(), dummy.id(), b -> (T)dummy.read(b), action);
+            registerClientCustomPacket((Class<T>) dummy.getClass(), dummy.id(), b -> (T) dummy.read(b), action);
         }
 
         <T extends CustomPacketPayloadSupport> void registerClientCustomPacket(Class<T> type, Identifier id,

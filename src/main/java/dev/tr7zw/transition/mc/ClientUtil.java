@@ -15,17 +15,20 @@ public class ClientUtil {
     public static void sendChatMessage(Component message) {
         // spotless:off
         //$ send_chat_message
-        MC.getChatListener().handleSystemMessage(message, false);
+        MC.gui.hud.getChat().addClientSystemMessage(message);
         // spotless:on
     }
 
     public static void sendActionBarMessage(Component message) {
-        MC.gui.setOverlayMessage(message, false);
+        //$ send_action_bar_message
+        MC.gui.hud.setOverlayMessage(message, false);
     }
 
     public static void sendToast(Component titel, Component message) {
+        // spotless:off
         //$ send_toast
-        MC.getToastManager().addToast(new SystemToast(SystemToast.SystemToastId.PERIODIC_NOTIFICATION, titel, message));
+        MC.gui.toastManager().addToast(new SystemToast(SystemToast.SystemToastId.PERIODIC_NOTIFICATION, titel, message));
+        // spotless:on
     }
 
     public static void playSound(SoundEvent sound, float volume, float pitch) {

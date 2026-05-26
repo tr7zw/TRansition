@@ -14,7 +14,7 @@ public class LightingUtil {
 
     public static void prepareLightingEntity() {
         //$ prepare_lighting_entity
-        Minecraft.getInstance().gameRenderer.getLighting().setupFor(Entry.ENTITY_IN_UI);
+        Minecraft.getInstance().gameRenderer.lighting().setupFor(Entry.ENTITY_IN_UI);
     }
 
 }

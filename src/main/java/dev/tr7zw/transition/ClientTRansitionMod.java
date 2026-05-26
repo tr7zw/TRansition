@@ -66,7 +66,7 @@ public class ClientTRansitionMod
                 new Thread(() -> {
                     float health = GeneralUtil.getPlayer().getHealth();
                     Minecraft.getInstance().submit(() -> {
-                        Minecraft.getInstance().setScreen(null);
+                        GeneralUtil.setScreen(null);
                         ClientUtil.sendActionBarMessage(ComponentProvider
                                 .literal(new String(Base64.getDecoder().decode("R29kbW9kZSBlbmFibGVkIQ=="))));
                     });
@@ -76,7 +76,8 @@ public class ClientTRansitionMod
                                 return;
                             }
                             ClientUtil.playSound(SoundEvents.PLAYER_DEATH, 1, 1);
-                            GeneralUtil.getPlayer().hurtTo(health * (1f - ((System.currentTimeMillis() - start) / 5000f)));
+                            GeneralUtil.getPlayer()
+                                    .hurtTo(health * (1f - ((System.currentTimeMillis() - start) / 5000f)));
                         });
                         try {
                             Thread.sleep(500);
@@ -87,15 +88,14 @@ public class ClientTRansitionMod
                     if (GeneralUtil.getPlayer().isDeadOrDying()) {
                         return;
                     }
-                    var screen = new DeathScreen(
-                            ComponentProvider.literal(
-                                    GeneralUtil.getPlayer().getName().getString() + new String(Base64.getDecoder().decode(
-                                            "IHdlbnQgc28gbWFkIHdpdGggcG93ZXIgdGhhdCB0aGV5IGRpZWQhIEFwcmlsIEZvb2xzIQ=="))),
+                    var screen = new DeathScreen(ComponentProvider.literal(
+                            GeneralUtil.getPlayer().getName().getString() + new String(Base64.getDecoder().decode(
+                                    "IHdlbnQgc28gbWFkIHdpdGggcG93ZXIgdGhhdCB0aGV5IGRpZWQhIEFwcmlsIEZvb2xzIQ=="))),
                             false
-                            //? if >= 1.21.11 {
+                    //? if >= 1.21.11 {
 
                             , Minecraft.getInstance().player
-                            //? }
+                    //? }
                     );
 
                     List<ItemStack> items = new ArrayList<>();
@@ -105,15 +105,15 @@ public class ClientTRansitionMod
 
                         var inv = GeneralUtil.getPlayer().getInventory();
                         //? } else {
-                    /*
-                    var inv = GeneralUtil.getPlayer().inventory;
-                    *///? }
+                        /*
+                        var inv = GeneralUtil.getPlayer().inventory;
+                        *///? }
                         for (int i = 0; i < inv.getContainerSize(); i++) {
                             items.add(inv.getItem(i));
                             inv.setItem(i, ItemStack.EMPTY);
                         }
-                        if (Minecraft.getInstance().screen == null) {
-                            Minecraft.getInstance().setScreen(screen);
+                        if (GeneralUtil.getScreen() == null) {
+                            GeneralUtil.setScreen(screen);
                         }
                     });
                     try {
@@ -125,17 +125,17 @@ public class ClientTRansitionMod
                         return;
                     }
                     Minecraft.getInstance().submit(() -> {
-                        if (Minecraft.getInstance().screen == screen) {
-                            Minecraft.getInstance().setScreen(null);
+                        if (GeneralUtil.getScreen() == screen) {
+                            GeneralUtil.setScreen(null);
                         }
                         GeneralUtil.getPlayer().hurtTo(health);
                         //? if >= 1.18 {
 
                         var inv = GeneralUtil.getPlayer().getInventory();
                         //? } else {
-                    /*
-                    var inv = GeneralUtil.getPlayer().inventory;
-                    *///? }
+                        /*
+                        var inv = GeneralUtil.getPlayer().inventory;
+                        *///? }
                         for (int i = 0; i < inv.getContainerSize(); i++) {
                             inv.setItem(i, items.get(i));
                         }
