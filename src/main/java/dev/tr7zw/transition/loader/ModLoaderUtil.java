@@ -1,8 +1,8 @@
 package dev.tr7zw.transition.loader;
 
 //? if forge || neoforge {
-/*
-import java.util.function.Consumer;
+
+/*import java.util.function.Consumer;
 *///? }
 import java.util.function.Function;
 
@@ -50,25 +50,25 @@ import net.minecraftforge.fml.IExtensionPoint;
 import net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory;
 //? }
 *///? } else if neoforge {
-/*
- import net.neoforged.fml.ModList;
- import net.minecraft.client.Minecraft;
- import org.apache.commons.lang3.ArrayUtils;
- import java.util.function.Consumer;
- import net.neoforged.fml.ModLoadingContext;
- import net.neoforged.fml.IExtensionPoint;
- import net.neoforged.bus.api.Event;
- import net.neoforged.neoforge.common.NeoForge;
- import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
- //? if >= 1.20.5 {
 
-  import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
- //? } else {
+/*import net.neoforged.fml.ModList;
+import net.minecraft.client.Minecraft;
+import org.apache.commons.lang3.ArrayUtils;
+import java.util.function.Consumer;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.IExtensionPoint;
+import net.neoforged.bus.api.Event;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+//? if >= 1.20.5 {
+
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+//? } else {
 /^
   import net.neoforged.neoforge.client.ConfigScreenHandler.ConfigScreenFactory;
   import net.neoforged.neoforge.event.TickEvent.ClientTickEvent;
  ^///? }
-*///? }
+    *///? }
 
 @UtilityClass
 public class ModLoaderUtil {
@@ -84,10 +84,16 @@ public class ModLoaderUtil {
         /*net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper.registerKeyBinding(keyBinding);
         *///? }
            //? } else if forge || neoforge {
-           /*
+
+        /*//? if >= 26.1 && neoforge {
+        
+        /^ModLoaderEventUtil.registerKeyMapping(keyBinding);
+        ^///? } else {
+        
            Minecraft.getInstance().options.keyMappings = ArrayUtils.add(Minecraft.getInstance().options.keyMappings,
                   keyBinding);
-           *///? }
+           //? }
+              *///? }
 
     }
 
@@ -101,8 +107,8 @@ public class ModLoaderUtil {
 
         return FabricLoader.getInstance().isModLoaded(name);
         //? } else {
-        /*
-        return ModList.get().isLoaded(name);
+
+        /*return ModList.get().isLoaded(name);
         *///? }
     }
 
@@ -121,8 +127,8 @@ public class ModLoaderUtil {
         }
         //? }
         //? if forge || neoforge {
-        /*
-        //? if <= 1.16.5 {
+
+        /*//? if <= 1.16.5 {
         
         // ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.DISPLAYTEST,
         // () -> Pair.of(() -> FMLNetworkConstants.IGNORESERVERONLY, (remote, isServer) -> true));
@@ -137,15 +143,15 @@ public class ModLoaderUtil {
                         () -> ModLoadingContext.get().getActiveContainer().getModInfo().getVersion().toString(),
                         (remote, isServer) -> true));
         //? }
-        //? }
-        *///? }
+           //? }
+           *///? }
     }
 
     public static void registerConfigScreen(Function<Screen, Screen> createScreen) {
         ClientTRansitionMod.configScreenManager.registerConfigScreen(createScreen);
         //? if forge || neoforge {
-        /*
-        //? if <= 1.16.5 {
+
+        /*//? if <= 1.16.5 {
         
         //         ModLoadingContext.get().registerExtensionPoint(
         // ExtensionPoint.CONFIGGUIFACTORY,
@@ -157,18 +163,18 @@ public class ModLoaderUtil {
                      return createScreen.apply(screen);
                  }));
          ^///? } else if >= 1.20.5 && neoforge {
-        /^
-          ModLoadingContext.get().registerExtensionPoint(IConfigScreenFactory.class, () -> (mc, screen) -> {
-              return createScreen.apply(screen);
-          });
-         ^///? } else {
+        
+        /^ModLoadingContext.get().registerExtensionPoint(IConfigScreenFactory.class, () -> (mc, screen) -> {
+            return createScreen.apply(screen);
+        });
+        ^///? } else {
         
         ModLoadingContext.get().registerExtensionPoint(ConfigScreenFactory.class,
                 () -> new ConfigScreenFactory((mc, screen) -> {
                     return createScreen.apply(screen);
                 }));
         //? }
-        *///? }
+           *///? }
     }
 
     @Deprecated
@@ -195,10 +201,10 @@ public class ModLoaderUtil {
     }
     ^///? }
     *///? } else if neoforge {
-    /*
-        public static <T extends Event> void registerForgeEvent(Consumer<T> handler) {
-        	NeoForge.EVENT_BUS.addListener(handler);
-        }
+
+    /*public static <T extends Event> void registerForgeEvent(Consumer<T> handler) {
+        NeoForge.EVENT_BUS.addListener(handler);
+    }
     *///? }
 
 }

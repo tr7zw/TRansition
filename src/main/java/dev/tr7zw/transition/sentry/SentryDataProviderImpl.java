@@ -33,9 +33,9 @@ public class SentryDataProviderImpl implements SentryDataProvider {
 
         /*return "Forge";
         *///? } else if neoforge {
-        /*
-        return "NeoForge";
-         *///? }
+
+        /*return "NeoForge";
+        *///? }
     }
 
     @Override
@@ -55,9 +55,10 @@ public class SentryDataProviderImpl implements SentryDataProvider {
                 .toList();
         ^///? }
         *///? } else if neoforge {
-        /*
-        return net.neoforged.fml.ModList.get().getMods().stream().map(m -> m.getModId() + ":" + m.getVersion()).toList();
-         *///? }
+
+        /*return net.neoforged.fml.ModList.get().getMods().stream().map(m -> m.getModId() + ":" + m.getVersion())
+                .toList();
+        *///? }
     }
 
     @Override
@@ -71,9 +72,10 @@ public class SentryDataProviderImpl implements SentryDataProvider {
         /*return net.minecraftforge.fml.ModList.get().getModContainerById("transition").get().getModInfo().getVersion()
                 .toString();
         *///? } else if neoforge {
-        /*
-        return net.neoforged.fml.ModList.get().getModContainerById("transition").get().getModInfo().getVersion().toString();
-         *///? }
+
+        /*return net.neoforged.fml.ModList.get().getModContainerById("transition").get().getModInfo().getVersion()
+                .toString();
+        *///? }
     }
 
     @Override
