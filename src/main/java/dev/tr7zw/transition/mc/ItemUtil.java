@@ -5,8 +5,10 @@ import java.util.Map.Entry;
 
 import com.mojang.authlib.GameProfile;
 
+import com.mojang.brigadier.exceptions.*;
 import lombok.experimental.UtilityClass;
 import net.minecraft.client.Minecraft;
+import net.minecraft.nbt.*;
 import net.minecraft.resources.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -100,6 +102,36 @@ public class ItemUtil {
     public static boolean hasCustomName(ItemStack stack) {
         //$ item_stack_has_custom_name
         return stack.has(net.minecraft.core.component.DataComponents.CUSTOM_NAME);
+    }
+
+    public static ItemStack decodeItemStack(String nbtString) {
+        try {
+            //? if >= 1.21.5 {
+
+            return ItemStack.CODEC.decode(NbtOps.INSTANCE, TagParser.parseCompoundFully(nbtString)).getOrThrow()
+                    .getFirst();
+            //? } else if >= 1.20.5 {
+
+            /*return ItemStack.CODEC.decode(NbtOps.INSTANCE, TagParser.parseTag(nbtString)).getOrThrow()
+                    .getFirst();
+            *///? } else {
+
+            /*return ItemStack.CODEC.decode(NbtOps.INSTANCE, TagParser.parseTag(nbtString)).getOrThrow(true, (s) -> {})
+                    .getFirst();
+            *///? }
+        } catch (CommandSyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String encodeItemStack(ItemStack stack) {
+        //? if >= 1.20.5 {
+
+        return ItemStack.CODEC.encodeStart(NbtOps.INSTANCE, stack).getOrThrow().toString();
+        //? } else {
+        /*
+        return ItemStack.CODEC.encodeStart(NbtOps.INSTANCE, stack).getOrThrow(true, (s) -> {}).toString();
+        *///? }
     }
 
 }
