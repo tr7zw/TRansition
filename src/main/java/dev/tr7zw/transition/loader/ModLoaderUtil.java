@@ -4,6 +4,7 @@ package dev.tr7zw.transition.loader;
 
 /*import java.util.function.Consumer;
 *///? }
+import java.util.concurrent.atomic.*;
 import java.util.function.Function;
 
 import dev.tr7zw.transition.ClientTRansitionMod;
@@ -72,6 +73,21 @@ import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 
 @UtilityClass
 public class ModLoaderUtil {
+
+    public static void createBasicKeybind(KeyMapping keyMapping, Runnable onPress) {
+        registerKeybind(keyMapping);
+        AtomicBoolean pressed = new AtomicBoolean();
+        ModLoaderEventUtil.registerClientTickStartListener(() -> {
+            if (keyMapping.isDown()) {
+                if (!pressed.get()) {
+                    onPress.run();
+                }
+                pressed.set(true);
+            } else {
+                pressed.set(false);
+            }
+        });
+    }
 
     public static void registerKeybind(KeyMapping keyBinding) {
         //? if fabric {
