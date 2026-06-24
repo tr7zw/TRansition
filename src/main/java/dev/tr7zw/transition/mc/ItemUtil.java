@@ -15,6 +15,7 @@ import net.minecraft.server.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.*;
 
 //? if >= 1.19.3 {
 
@@ -116,8 +117,8 @@ public class ItemUtil {
         try {
             //? if >= 1.21.5 {
 
-            return ItemStack.CODEC.decode(level.registryAccess().createSerializationContext(NbtOps.INSTANCE), TagParser.parseCompoundFully(nbtString)).getOrThrow()
-                    .getFirst();
+            return ItemStack.CODEC.decode(level.registryAccess().createSerializationContext(NbtOps.INSTANCE),
+                    TagParser.parseCompoundFully(nbtString)).getOrThrow().getFirst();
             //? } else if >= 1.20.5 {
 
             /*return ItemStack.CODEC.decode(NbtOps.INSTANCE, TagParser.parseTag(nbtString)).getOrThrow()
@@ -140,7 +141,9 @@ public class ItemUtil {
     public static String encodeItemStack(Level level, ItemStack stack) {
         //? if >= 1.20.5 {
 
-        return ((Tag)ItemStack.CODEC.encodeStart(level.registryAccess().createSerializationContext(NbtOps.INSTANCE), stack).result().get()).toString();
+        return ((Tag) ItemStack.CODEC
+                .encodeStart(level.registryAccess().createSerializationContext(NbtOps.INSTANCE), stack).result().get())
+                .toString();
         //? } else {
         /*
         return ItemStack.CODEC.encodeStart(NbtOps.INSTANCE, stack).getOrThrow(true, (s) -> {}).toString();
