@@ -8,8 +8,10 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.brigadier.exceptions.*;
 import lombok.experimental.UtilityClass;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.*;
 import net.minecraft.nbt.*;
 import net.minecraft.resources.*;
+import net.minecraft.server.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -31,6 +33,7 @@ import net.minecraft.nbt.NbtUtils;
 
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.ResolvableProfile;
+import net.minecraft.world.level.*;
 //? }
 
 @UtilityClass
@@ -104,11 +107,16 @@ public class ItemUtil {
         return stack.has(net.minecraft.core.component.DataComponents.CUSTOM_NAME);
     }
 
+    @Deprecated
     public static ItemStack decodeItemStack(String nbtString) {
+        throw new RuntimeException("Outdated api");
+    }
+
+    public static ItemStack decodeItemStack(Level level, String nbtString) {
         try {
             //? if >= 1.21.5 {
 
-            return ItemStack.CODEC.decode(NbtOps.INSTANCE, TagParser.parseCompoundFully(nbtString)).getOrThrow()
+            return ItemStack.CODEC.decode(level.registryAccess().createSerializationContext(NbtOps.INSTANCE), TagParser.parseCompoundFully(nbtString)).getOrThrow()
                     .getFirst();
             //? } else if >= 1.20.5 {
 
@@ -124,10 +132,15 @@ public class ItemUtil {
         }
     }
 
+    @Deprecated
     public static String encodeItemStack(ItemStack stack) {
+        throw new RuntimeException("Outdated api");
+    }
+
+    public static String encodeItemStack(Level level, ItemStack stack) {
         //? if >= 1.20.5 {
 
-        return ItemStack.CODEC.encodeStart(NbtOps.INSTANCE, stack).getOrThrow().toString();
+        return ((Tag)ItemStack.CODEC.encodeStart(level.registryAccess().createSerializationContext(NbtOps.INSTANCE), stack).result().get()).toString();
         //? } else {
         /*
         return ItemStack.CODEC.encodeStart(NbtOps.INSTANCE, stack).getOrThrow(true, (s) -> {}).toString();
