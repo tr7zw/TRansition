@@ -1,14 +1,22 @@
 package dev.tr7zw.transition.mc;
 
+import com.mojang.blaze3d.vertex.*;
 import lombok.experimental.UtilityClass;
+import net.minecraft.world.phys.*;
 
 //? if >= 1.19.3 {
 
-import org.joml.Quaternionf;
+import net.minecraft.client.*;
+import net.minecraft.world.phys.*;
+import org.joml.*;
 import com.mojang.math.Axis;
+
+import java.lang.Math;
 //? } else {
 /*
+ import com.mojang.math.Matrix4f;
  import com.mojang.math.Vector3f;
+ import com.mojang.math.Vector4f;
  import com.mojang.math.Quaternion;
 *///? }
 
@@ -49,4 +57,30 @@ public class MathUtil {
         *///? }
     }
 
+    //? if >= 1.19.3 {
+    public static Vec3 getWorldSpacePosition(PoseStack poseStack) {
+        return getWorldSpacePosition(poseStack.last().pose());
+    }
+
+    public static Vec3 getWorldSpacePosition(Matrix4f pose) {
+        var camPos = GeneralUtil.getCameraEntity().position();
+        Vector4f origin = new Vector4f(0, 0, 0, 1f);
+        origin.mul(pose);
+        var rawCurPos = camPos.add(origin.x, origin.y, origin.z);
+        return rawCurPos;
+    }
+    //? } else {
+    /*
+    public static Vec3 getWorldSpacePosition(PoseStack poseStack) {
+        return getWorldSpacePosition(poseStack.last().pose());
+    }
+    
+    public static Vec3 getWorldSpacePosition(Matrix4f pose) {
+        var camPos = GeneralUtil.getCameraEntity().position();
+        Vector4f origin = new Vector4f(0, 0, 0, 1f);
+        origin.transform(pose);
+        var rawCurPos = camPos.add(origin.x(), origin.y(), origin.z());
+        return rawCurPos;
+    }
+    *///? }
 }
