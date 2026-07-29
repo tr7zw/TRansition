@@ -2,22 +2,22 @@ package dev.tr7zw.transition.mc;
 
 import com.mojang.blaze3d.vertex.*;
 import lombok.experimental.UtilityClass;
+import net.minecraft.client.*;
 import net.minecraft.world.phys.*;
 
 //? if >= 1.19.3 {
 
-import net.minecraft.client.*;
 import net.minecraft.world.phys.*;
 import org.joml.*;
 import com.mojang.math.Axis;
 
 import java.lang.Math;
 //? } else {
-/*
- import com.mojang.math.Matrix4f;
- import com.mojang.math.Vector3f;
- import com.mojang.math.Vector4f;
- import com.mojang.math.Quaternion;
+
+/*import com.mojang.math.Matrix4f;
+import com.mojang.math.Vector3f;
+import com.mojang.math.Vector4f;
+import com.mojang.math.Quaternion;
 *///? }
 
 @UtilityClass
@@ -37,13 +37,13 @@ public class MathUtil {
     public static Axis ZN = f -> new Quaternionf().rotationZ(-f);
     public static Axis ZP = f -> new Quaternionf().rotationZ(f);
     //? } else {
-    /*
-     public static Vector3f XN = new Vector3f(-1.0F, 0.0F, 0.0F);
-     public static Vector3f XP = new Vector3f(1.0F, 0.0F, 0.0F);
-     public static Vector3f YN = new Vector3f(0.0F, -1.0F, 0.0F);
-     public static Vector3f YP = new Vector3f(0.0F, 1.0F, 0.0F);
-     public static Vector3f ZN = new Vector3f(0.0F, 0.0F, -1.0F);
-     public static Vector3f ZP = new Vector3f(0.0F, 0.0F, 1.0F);
+
+    /*public static Vector3f XN = new Vector3f(-1.0F, 0.0F, 0.0F);
+    public static Vector3f XP = new Vector3f(1.0F, 0.0F, 0.0F);
+    public static Vector3f YN = new Vector3f(0.0F, -1.0F, 0.0F);
+    public static Vector3f YP = new Vector3f(0.0F, 1.0F, 0.0F);
+    public static Vector3f ZN = new Vector3f(0.0F, 0.0F, -1.0F);
+    public static Vector3f ZP = new Vector3f(0.0F, 0.0F, 1.0F);
     *///? }
 
     //? if >= 1.19.3 {
@@ -51,36 +51,30 @@ public class MathUtil {
     public static void conjugate(Quaternionf quaternion2) {
         quaternion2.conjugate();
         //? } else {
-        /*
-         public static void conjugate(Quaternion quaternion2) {
-         quaternion2.conj();
+
+        /*public static void conjugate(Quaternion quaternion2) {
+        quaternion2.conj();
         *///? }
     }
 
-    //? if >= 1.19.3 {
     public static Vec3 getWorldSpacePosition(PoseStack poseStack) {
         return getWorldSpacePosition(poseStack.last().pose());
     }
 
     public static Vec3 getWorldSpacePosition(Matrix4f pose) {
-        var camPos = GeneralUtil.getCameraEntity().position();
+        var camPos = GeneralUtil.getCameraPos();
         Vector4f origin = new Vector4f(0, 0, 0, 1f);
+        //? if >= 1.19.3 {
+
         origin.mul(pose);
         var rawCurPos = camPos.add(origin.x, origin.y, origin.z);
-        return rawCurPos;
-    }
-    //? } else {
-    /*
-    public static Vec3 getWorldSpacePosition(PoseStack poseStack) {
-        return getWorldSpacePosition(poseStack.last().pose());
-    }
-    
-    public static Vec3 getWorldSpacePosition(Matrix4f pose) {
-        var camPos = GeneralUtil.getCameraEntity().position();
-        Vector4f origin = new Vector4f(0, 0, 0, 1f);
+        //? } else {
+        /*
         origin.transform(pose);
         var rawCurPos = camPos.add(origin.x(), origin.y(), origin.z());
+         *///? }
+
         return rawCurPos;
     }
-    *///? }
+
 }

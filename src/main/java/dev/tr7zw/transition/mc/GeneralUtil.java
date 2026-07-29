@@ -10,6 +10,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.*;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.*;
 
 @UtilityClass
 public class GeneralUtil {
@@ -57,6 +58,19 @@ public class GeneralUtil {
     public static void setScreen(Screen screen) {
         //$ set_screen
         Minecraft.getInstance().gui.setScreen(screen);
+    }
+
+    public static Vec3 getCameraPos() {
+        //? if >= 26.2 {
+
+        return Minecraft.getInstance().gameRenderer.mainCamera().position();
+        //? } else if >= 1.21.6 {
+        /*
+        return Minecraft.getInstance().gameRenderer.getMainCamera().position();
+        *///? } else {
+        /*
+        return Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
+         *///? }
     }
 
 }
