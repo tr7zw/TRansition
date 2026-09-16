@@ -129,19 +129,6 @@ public class ModLoaderUtil {
     }
 
     public static void disableDisplayTest() {
-        //? if fabric {
-
-        try {
-            Class.forName("dev.su5ed.sinytra.connector.mod.ConnectorMod").getCanonicalName();
-            // Fabric mod running under Sinytra Connector, crash right here
-            System.out.println("Detected Sinytra Connector used on a Fabric mod. Closing the game. "
-                    + ModLoaderUtil.class.getPackage().toString());
-            Util.getPlatform().openUri("https://tr7zw.github.io/sinytraconnector/");
-            System.exit(-1);
-        } catch (Exception ex) {
-            // good
-        }
-        //? }
         //? if forge || neoforge {
 
         /*//? if <= 1.16.5 {

@@ -28,14 +28,23 @@ public class MathUtil {
     public static final float TWO_PI = (float) (Math.PI * 2);
     public static final float DEG_TO_RAD = (float) (Math.PI / 180.0);
 
-    //? if >= 1.19.3 {
+    //? if >= 26.3 {
 
+    public static Axis XN = Axis.XN;
+    public static Axis XP = Axis.XP;
+    public static Axis YN = Axis.YN;
+    public static Axis YP = Axis.YP;
+    public static Axis ZN = Axis.ZN;
+    public static Axis ZP = Axis.ZP;
+    //? } else if >= 1.19.3 {
+    /*
     public static Axis XN = f -> new Quaternionf().rotationX(-f);
     public static Axis XP = f -> new Quaternionf().rotationX(f);
     public static Axis YN = f -> new Quaternionf().rotationY(-f);
     public static Axis YP = f -> new Quaternionf().rotationY(f);
     public static Axis ZN = f -> new Quaternionf().rotationZ(-f);
     public static Axis ZP = f -> new Quaternionf().rotationZ(f);
+    */
     //? } else {
 
     /*public static Vector3f XN = new Vector3f(-1.0F, 0.0F, 0.0F);
