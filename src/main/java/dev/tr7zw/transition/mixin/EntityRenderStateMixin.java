@@ -1,5 +1,6 @@
 package dev.tr7zw.transition.mixin;
 
+import java.lang.ref.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,9 +17,8 @@ import net.minecraft.world.entity.Entity;
 @Mixin(net.minecraft.client.renderer.entity.state.EntityRenderState.class)
 public class EntityRenderStateMixin implements EntityRenderStateExtender, ExtensionHolder {
 
-    @Getter
-    @Setter
-    private Entity transitionEntity;
+
+    private WeakReference<Entity> transitionEntity;
 
     private Map<Object, Object> extensionMap = new HashMap<>();
 
@@ -32,6 +32,18 @@ public class EntityRenderStateMixin implements EntityRenderStateExtender, Extens
         return type.cast(extensionMap.get(key));
     }
 
+    @Override
+    public Entity getTransitionEntity() {
+        if (transitionEntity == null) {
+            return null;
+        }
+        return transitionEntity.get();
+    }
+
+    @Override
+    public void setTransitionEntity(Entity entity) {
+        this.transitionEntity = new WeakReference<>(entity);
+    }
 }
 //? } else {
 

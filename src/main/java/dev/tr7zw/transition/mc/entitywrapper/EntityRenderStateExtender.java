@@ -4,8 +4,10 @@ import net.minecraft.world.entity.Entity;
 
 public interface EntityRenderStateExtender {
 
-    public Entity getTransitionEntity();
+    @Deprecated
+    Entity getTransitionEntity();
 
-    public void setTransitionEntity(Entity entity);
+    @Deprecated
+    void setTransitionEntity(Entity entity);
 
 }
