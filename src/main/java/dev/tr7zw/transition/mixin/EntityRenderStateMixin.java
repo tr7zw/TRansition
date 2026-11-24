@@ -17,7 +17,6 @@ import net.minecraft.world.entity.Entity;
 @Mixin(net.minecraft.client.renderer.entity.state.EntityRenderState.class)
 public class EntityRenderStateMixin implements EntityRenderStateExtender, ExtensionHolder {
 
-
     private WeakReference<Entity> transitionEntity;
 
     private Map<Object, Object> extensionMap = new HashMap<>();
