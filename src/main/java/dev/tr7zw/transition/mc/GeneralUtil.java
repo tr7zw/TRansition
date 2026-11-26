@@ -1,6 +1,7 @@
 package dev.tr7zw.transition.mc;
 
 import java.util.Map;
+import java.util.concurrent.*;
 
 import lombok.experimental.UtilityClass;
 import net.minecraft.client.KeyMapping;
@@ -17,7 +18,7 @@ public class GeneralUtil {
 
     //? if >= 1.21.9 {
 
-    private static final Map<String, net.minecraft.client.KeyMapping.Category> categoryCache = new java.util.HashMap<>();
+    private static final Map<String, net.minecraft.client.KeyMapping.Category> categoryCache = new ConcurrentHashMap<>();
     //? }
 
     public static Identifier getResourceLocation(String namespace, String path) {
